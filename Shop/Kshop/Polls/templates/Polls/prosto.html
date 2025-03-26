@@ -1,0 +1,11 @@
+{% for c in cart %}
+          <form class="modal-body" method="post" action="{% url "login" %}">
+              {% csrf_token %}
+            <div class="anyClass">
+              {{c.cart}}
+              <div class="modal_login_div d-flex justify-content-center">
+                <button class="log_in_modal" type="submit">Войти</button>
+              </div>
+            </div>  
+          </form>
+          {% endfor %}

@@ -1,0 +1,45 @@
+body {
+    overflow-x: hidden;
+}
+
+.list-group {
+    width: 460px;
+    position: sticky;
+    top: 30px;
+}
+
+.container-fluid {
+    align-items: center;
+    width: 500px;
+}
+
+.header_knob {
+    align-items: center;
+    width: 500px;
+}
+
+.navbar-brand {
+    align-items: center;
+    width: 500px;
+}
+
+.marginleft {
+    margin-left : 0px;
+}
+
+.qq {
+    color: #8d7caf;
+}
+
+.content {
+    width: 90%;
+    height: 400px;
+}
+
+.cards-wrapper {
+    display: flex;
+}
+
+.img_group {
+    margin: 15px;
+}
