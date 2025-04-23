@@ -9,6 +9,8 @@ class Product(models.Model):
     date_posted = models.DateTimeField(default=timezone.now)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     photo = models.ImageField(upload_to="images/")
+    category = models.CharField(max_length=255, default='Без категории')  # Задали значение по умолчанию
+
     def __str__(self):
         return self.title
     

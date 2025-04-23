@@ -22,4 +22,11 @@ urlpatterns = [
     path('<int:product_id>/', views.remove_from_cart, name='remove_from_cart'),
     path('cart/clear/', views.clear_cart, name='clear_cart'),
     
+    path('enhypen/', views.enhypen_view, name='enhypen'),
+    path('merch.html', views.merch_view, name='merch'),
+    path('new/', views.new_view, name='new'),
+    path('straykids/', views.straykids_view, name='straykids'),
+    path('stocks/', views.stocks_view, name='stocks'),
+    path('seventeen/', views.seventeen_view, name='seventeen'),
+    
 ]

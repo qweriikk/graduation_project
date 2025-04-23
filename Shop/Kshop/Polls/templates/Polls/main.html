@@ -39,15 +39,15 @@
     <div class="row">
       <div class="container col-3 marginleft">
         <div class="list-group col">
-            <a class="dropdown-item" href="stocks.html">Акции</a>
-            <a class="dropdown-item" href=".">Новинки</a>
-            <a class="list-group-item dropdown-toggle" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" href="#">Альбомы</a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="seventeen.html">Seventeen</a></li>
-              <li><a class="dropdown-item" href="enhypen.html">Enhypen</a></li>
-              <li><a class="dropdown-item" href="straykids.html">Stray Kids</a></li>
-            </ul>
-            <a class="dropdown-item" href="merch.html">Мерч</a>
+          <a class="dropdown-item" href="{% url 'stocks' %}">Акции</a>
+          <a class="dropdown-item" href="{% url 'main' %}">Новинки</a>
+          <a class="list-group-item dropdown-toggle" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" href="#">Альбомы</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{% url 'seventeen' %}">Seventeen</a></li>
+            <li><a class="dropdown-item" href="{% url 'enhypen' %}">Enhypen</a></li>
+            <li><a class="dropdown-item" href="{% url 'straykids' %}">Stray Kids</a></li>
+          </ul>
+          <a class="dropdown-item" href="{% url 'merch' %}">Мерч</a>
         </div>   
       </div>
       <div class="row col-9">

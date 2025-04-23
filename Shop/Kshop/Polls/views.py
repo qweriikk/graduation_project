@@ -108,8 +108,32 @@ class LoginView(View):
                 login(request, user)
                 return redirect("main")
         return redirect("main")   
-                 
+    
+def enhypen_view(request):
+    products = Product.objects.filter(category='enhypen')
+    return render(request, 'Polls/enhypen.html', {'products': products})
 
+def merch_view(request):
+    products = Product.objects.filter(category='merch')
+    return render(request, 'Polls/merch.html', {'products': products})
+
+def new_view(request):
+    products = Product.objects.filter(category='new')
+    return render(request, 'Polls/new.html', {'products': products})
+
+def straykids_view(request):
+    products = Product.objects.filter(category='straykids')
+    return render(request, 'Polls/straykids.html', {'products': products})
+
+def stocks_view(request):
+    products = Product.objects.filter(category='stocks')
+    return render(request, 'Polls/stocks.html', {'products': products})
+
+def seventeen_view(request):
+    products = Product.objects.filter(category='seventeen')
+    return render(request, 'Polls/seventeen.html', {'products': products})
+    
+                
 
 # def register_view(request):
 #     # if request.user.is_authenticated:

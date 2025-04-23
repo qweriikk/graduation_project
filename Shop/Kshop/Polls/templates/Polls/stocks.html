@@ -1,66 +1,74 @@
+{% load static %}
 <!doctype html>
-<html lang="en">
+<html lang="ru">
   <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="styles.css">
-</head>
+    <link rel="stylesheet" href="{% static 'Polls/styles.css' %}">
+  </head>
   <body>
-    <!-- <div class="container-fluid"> -->
     <nav class="navbar navbar-light bg-light py-4" style="width: 100%;">
+      <div class="container">
+          <a class="navbar-brand" href="{% url 'main' %}">
+              <img class="img-fluid me-1" src="{% static 'img/logo3.png' %}" width="120px" height="100px">
+          </a>
+          <div class="container-fluid">
+            <form class="d-flex">
+              <input class="form-control me-2" type="search" placeholder="Поиск" aria-label="Поиск">
+              <button class="btn" type="submit"><img style="width: 30px; height: 30px;" src="{% static 'img/search.png' %}"/></button>
+            </form>
+          </div>
+      </div>
+      <div class="header_knob">
         <div class="container">
-            <a class="navbar-brand" href="base.html">
-                <img class="img-fluid me-1" src="logo3.png" width="120px" height="100px">
+            <a class="navbar-brand" href="#exampleModalToggle" data-bs-toggle="modal">
+                <img class="img-fluid me-4" src="{% static 'img/avatar.png' %}" width="40px" height="40px">
             </a>
-            <div class="container-fluid">
-              <form class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="Поиск" aria-label="Поиск">
-                <button class="btn" type="submit"><img style="width: 30px; height: 30px;" src="search.png"/></button>
-              </form>
-            </div>
-        </div>
-        <div class="header_knob">
-          <div class="container">
-              <a class="navbar-brand" href="">
-                  <img class="img-fluid me-4" src="avatar.png" width="40px" height="40px">
-              </a>
-              <a class="navbar-brand" href="">
-                  <img class="img-fluid me-4" src="like.png" width="40px" height="40px">
-              </a>
-              <a class="navbar-brand" href="">
-                  <img class="img-fluid me-4" src="basket.png" width="50px" height="50px">
-              </a>
-          </div>   
+            <a class="navbar-brand" href="">
+                <img class="img-fluid me-4" src="{% static 'img/like.png' %}" width="40px" height="40px">
+            </a>
+            <a class="navbar-brand" href="#exampleModalToggle3" data-bs-toggle="modal">
+                <img class="img-fluid me-4" src="{% static 'img/basket.png' %}" width="50px" height="50px">
+            </a>
+        </div>   
     </nav> 
     <div class="row">
       <div class="container col-3 marginleft">
         <div class="list-group col">
-            <a class="dropdown-item" href="stocks.html">Акции</a>
-            <a class="dropdown-item" href="new.html">Новинки</a>
+            <a class="dropdown-item" href="{% url 'stocks' %}">Акции</a>
+            <a class="dropdown-item" href="{% url 'main' %}">Новинки</a>
             <a class="list-group-item dropdown-toggle" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" href="#">Альбомы</a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="seventeen.html">Seventeen</a></li>
-              <li><a class="dropdown-item" href="enhypen.html">Enhypen</a></li>
-              <li><a class="dropdown-item" href="straykids.html">Stray Kids</a></li>
+              <li><a class="dropdown-item" href="{% url 'seventeen' %}">Seventeen</a></li>
+              <li><a class="dropdown-item" href="{% url 'enhypen' %}">Enhypen</a></li>
+              <li><a class="dropdown-item" href="{% url 'straykids' %}">Stray Kids</a></li>
             </ul>
-            <a class="dropdown-item" href="merch.html">Мерч</a>
+            <a class="dropdown-item" href="{% url 'merch' %}">Мерч</a>
         </div>   
       </div>
       <div class="row col-9">
         <div class="content">
-            <div class="row">
-              <label class="fs-2 fw-bold text-center qq">Акции</label>
-            </div>
-            <div class="row">
-                <label class="fs-3">На данный момент в магазине нет акций.</label>
+          <div class="row">
+            <label class="fs-2 fw-bold text-center qq">Акции</label>
+          </div>
+          <div class="row mt-4">
+            <div class="col">
+              <div class="alert alert-info fs-5" role="alert">
+                🎉 Покупай 2 альбома — получай 3-й в подарок! Акция действует до конца месяца.
+              </div>
+              <div class="alert alert-warning fs-5" role="alert">
+                🔥 Скидка 15% на мерч при покупке от 3000 руб.
+              </div>
+              <div class="alert alert-success fs-5" role="alert">
+                🛍 Бесплатная доставка при заказе от 5 000 руб. по всей России.
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>   
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   </body>
 </html>
