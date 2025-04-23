@@ -4,71 +4,172 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'Polls/styles.css' %}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <style>
+      .alert-purple {
+        background-color: #e0bbff;
+        color: #4a0072;
+        border: 1px solid #d29eff;
+      }
+
+      .stocks-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 20px;
+        padding: 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .stocks-item {
+        background-color: #fff;
+        border-radius: 15px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        transition: transform 0.3s, box-shadow 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+      }
+
+      .stocks-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+      }
+
+      .stocks-item .icon {
+        font-size: 40px;
+        color: #8d7caf;
+        margin-bottom: 15px;
+        transition: transform 0.3s ease;
+      }
+
+      .stocks-item:hover .icon {
+        transform: scale(1.2);
+      }
+
+      .stocks-item .stocks-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        line-height: 1.3;
+      }
+
+      .stocks-item .stocks-description {
+        font-size: 1rem;
+        color: #555;
+        line-height: 1.6;
+      }
+
+      .menu-column {
+        flex: 1;
+        max-width: 300px;
+      }
+
+      .stocks-column {
+        flex: 3;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .content-row {
+        display: flex;
+        justify-content: flex-start;
+        gap: 20px;
+        padding: 20px;
+      }
+
+      .stocks-title-section {
+        font-size: 2rem;
+        font-weight: bold;
+        margin: 20px 20px 0 20px;
+        color: #8d7caf;
+        text-transform: uppercase;
+      }
+    </style>
   </head>
   <body>
+
     <nav class="navbar navbar-light bg-light py-4" style="width: 100%;">
       <div class="container">
-          <a class="navbar-brand" href="{% url 'main' %}">
-              <img class="img-fluid me-1" src="{% static 'img/logo3.png' %}" width="120px" height="100px">
-          </a>
-          <div class="container-fluid">
-            <form class="d-flex">
-              <input class="form-control me-2" type="search" placeholder="Поиск" aria-label="Поиск">
-              <button class="btn" type="submit"><img style="width: 30px; height: 30px;" src="{% static 'img/search.png' %}"/></button>
-            </form>
-          </div>
+        <a class="navbar-brand" href="{% url 'main' %}">
+            <img class="img-fluid me-1" src="{% static 'img/logo3.png' %}" width="120px" height="100px">
+        </a>
+        <div class="container-fluid">
+          <form class="d-flex">
+            <input class="form-control me-2" type="search" placeholder="Поиск" aria-label="Поиск">
+            <button class="btn" type="submit"><img style="width: 30px; height: 30px;" src="{% static 'img/search.png' %}"/></button>
+          </form>
+        </div>
       </div>
       <div class="header_knob">
         <div class="container">
-            <a class="navbar-brand" href="#exampleModalToggle" data-bs-toggle="modal">
-                <img class="img-fluid me-4" src="{% static 'img/avatar.png' %}" width="40px" height="40px">
-            </a>
-            <a class="navbar-brand" href="">
-                <img class="img-fluid me-4" src="{% static 'img/like.png' %}" width="40px" height="40px">
-            </a>
-            <a class="navbar-brand" href="#exampleModalToggle3" data-bs-toggle="modal">
-                <img class="img-fluid me-4" src="{% static 'img/basket.png' %}" width="50px" height="50px">
-            </a>
-        </div>   
-    </nav> 
-    <div class="row">
-      <div class="container col-3 marginleft">
-        <div class="list-group col">
-            <a class="dropdown-item" href="{% url 'stocks' %}">Акции</a>
-            <a class="dropdown-item" href="{% url 'main' %}">Новинки</a>
-            <a class="list-group-item dropdown-toggle" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" href="#">Альбомы</a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="{% url 'seventeen' %}">Seventeen</a></li>
-              <li><a class="dropdown-item" href="{% url 'enhypen' %}">Enhypen</a></li>
-              <li><a class="dropdown-item" href="{% url 'straykids' %}">Stray Kids</a></li>
-            </ul>
-            <a class="dropdown-item" href="{% url 'merch' %}">Мерч</a>
-        </div>   
-      </div>
-      <div class="row col-9">
-        <div class="content">
-          <div class="row">
-            <label class="fs-2 fw-bold text-center qq">Акции</label>
-          </div>
-          <div class="row mt-4">
-            <div class="col">
-              <div class="alert alert-info fs-5" role="alert">
-                🎉 Покупай 2 альбома — получай 3-й в подарок! Акция действует до конца месяца.
-              </div>
-              <div class="alert alert-warning fs-5" role="alert">
-                🔥 Скидка 15% на мерч при покупке от 3000 руб.
-              </div>
-              <div class="alert alert-success fs-5" role="alert">
-                🛍 Бесплатная доставка при заказе от 5 000 руб. по всей России.
-              </div>
-            </div>
-          </div>
+          <a class="navbar-brand" href="#exampleModalToggle" data-bs-toggle="modal">
+              <img class="img-fluid me-4" src="{% static 'img/avatar.png' %}" width="40px" height="40px">
+          </a>
+          <a class="navbar-brand" href="">
+              <img class="img-fluid me-4" src="{% static 'img/like.png' %}" width="40px" height="40px">
+          </a>
+          <a class="navbar-brand" href="#exampleModalToggle3" data-bs-toggle="modal">
+              <img class="img-fluid me-4" src="{% static 'img/basket.png' %}" width="50px" height="50px">
+          </a>
         </div>
       </div>
-    </div>   
+    </nav>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <div class="content-row">
+      <!-- Боковое меню -->
+      <div class="menu-column">
+        <div class="list-group">
+          <a class="dropdown-item" href="{% url 'stocks' %}">Акции</a>
+          <a class="dropdown-item" href="{% url 'main' %}">Новинки</a>
+          <a class="list-group-item dropdown-toggle" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" href="#">Альбомы</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{% url 'seventeen' %}">Seventeen</a></li>
+            <li><a class="dropdown-item" href="{% url 'enhypen' %}">Enhypen</a></li>
+            <li><a class="dropdown-item" href="{% url 'straykids' %}">Stray Kids</a></li>
+          </ul>
+          <a class="dropdown-item" href="{% url 'merch' %}">Мерч</a>
+        </div>
+      </div>
+
+      <!-- Колонка с акциями -->
+<div class="stocks-column">
+  <div class="stocks-grid">
+    <!-- Заголовок прямо в сетке -->
+    <div style="grid-column: 1 / -1; text-align: center;">
+      <h2 class="stocks-title-section">Акции</h2>
+    </div>
+
+    <!-- Карточки -->
+    <div class="stocks-item">
+      <i class="fas fa-tag icon"></i>
+      <h3 class="stocks-title">Скидка 30% на все товары</h3>
+      <p class="stocks-description">Получите скидку 30% на любой товар в нашем магазине. Не упустите шанс приобрести качественную продукцию по выгодной цене.</p>
+    </div>
+    <div class="stocks-item">
+      <i class="fas fa-gift icon"></i>
+      <h3 class="stocks-title">Подарок при заказе</h3>
+      <p class="stocks-description">При покупке на сумму от 2000 рублей — получите подарок на выбор. Воспользуйтесь акцией и порадуйте себя!</p>
+    </div>
+    <div class="stocks-item">
+      <i class="fas fa-percent icon"></i>
+      <h3 class="stocks-title">Скидка 15% на первый заказ</h3>
+      <p class="stocks-description">Если вы первый раз у нас, получите скидку 15% на ваш первый заказ. Регистрируйтесь и экономьте с нами!</p>
+    </div>
+    <div class="stocks-item">
+      <i class="fas fa-calendar-day icon"></i>
+      <h3 class="stocks-title">Акция дня</h3>
+      <p class="stocks-description">Каждый день у нас новые супервыгодные предложения. Следите за нашими акциями и покупайте лучшее с большим удовольствием!</p>
+    </div>
+  </div>
+</div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
