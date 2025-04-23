@@ -76,7 +76,7 @@ def remove_from_cart(request, product_id):
 def clear_cart(request):
     cart = get_object_or_404(Cart, user=request.user)
     cart.items.all().delete()
-    return redirect('cart_detail')
+    return redirect('main')
 
 def cart_detail(request):
     cart = get_object_or_404(Cart, user=request.user)

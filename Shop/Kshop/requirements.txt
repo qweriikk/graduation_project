@@ -1,0 +1,3 @@
+django
+django-registration==5.2.1
+pillow

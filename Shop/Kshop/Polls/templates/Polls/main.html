@@ -171,11 +171,17 @@
                 <div>{{ item.product.title }}</div>
                 <form method="post" action="{% url "remove_from_cart" item.product.id %}" class="modal_login_div d-flex justify-content-center">
                   {% csrf_token %}
-                  <button class="log_in_modal" type="submit">Войти</button>
+                  <button class="log_in_modal" type="submit">Удалить</button>
                 </form>
               </div>  
             </div>
           {% endfor %}
+          <div>
+            <form method="post" action="{% url "clear_cart" %}" class="modal_login_div d-flex justify-content-center">
+              {% csrf_token %}
+              <button class="log_in_modal" type="submit">Очистить корзину</button>
+            </form>  
+          </div>  
         </div>
       </div>
     </div>
