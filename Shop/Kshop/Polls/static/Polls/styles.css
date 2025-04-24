@@ -4,9 +4,9 @@ body {
 }
 
 html, body {
-height: 100%;
-margin: 0;
-padding: 0;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 .container-fluid {
@@ -34,31 +34,57 @@ padding: 0;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 20px;  /* Для отступов между карточками */
+  gap: 20px;
+  padding: 20px;
 }
 
+/* Карточки продуктов */
 .card {
   margin-top: 20px;
   border: none;
   width: 100%;
-  max-width: 350px;  /* Устанавливаем максимальную ширину для карточки */
+  max-width: 230px;  /* Уменьшаем максимальную ширину карточек */
   border-radius: 1rem;
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
-  padding: 2rem;
+  padding: 1rem;
   text-align: center;
-  background-color: #8d7caf;  /* Стандартный цвет для фона карточек */
+  background-color: #8d7caf;
   color: white;
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px); /* Легкий эффект на карточке */
 }
 
 .card-title {
-  font-size: 1.8rem;
+  font-size: 1.4rem;  /* Уменьшаем размер шрифта */
   font-weight: bold;
+  margin-bottom: 10px;
 }
 
 .card-text {
-  font-size: 1rem;
+  font-size: 0.8rem;  /* Уменьшаем размер текста */
+  margin-bottom: 10px;
 }
 
+/* Для цен на карточках */
+.card-price {
+  font-size: 1.1rem;  /* Уменьшаем шрифт цены */
+  font-weight: bold;
+  color: #f1f1f1;
+  margin-bottom: 15px;
+}
+
+/* Изображение карточки */
+.card img {
+  max-width: 100%;
+  height: 150px;  /* Ограничиваем высоту изображений */
+  object-fit: cover;  /* Устанавливаем обрезку изображения */
+  border-radius: 10px;
+}
+
+/* Разные фоны для карточек */
 .bg-purple-1 {
   background-color: #a58edb;
 }
@@ -69,14 +95,6 @@ padding: 0;
 
 .bg-purple-3 {
   background-color: #705c9c;
-}
-
-.card h3 {
-  font-size: 1.8rem;
-}
-
-.card p {
-  font-size: 1rem;
 }
 
 .content {
@@ -149,97 +167,82 @@ padding: 0;
 /* Мобильная адаптивность */
 @media (max-width: 768px) {
   .list-group {
-      max-width: 100%;
-      margin: 0;
-      padding: 0;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
   }
 
   .content {
-      padding: 10px;
+    padding: 10px;
   }
 
   .navbar-brand img {
-      width: 80px;
-      height: 70px;
+    width: 80px;
+    height: 70px;
   }
 
-  .card h3 {
-      font-size: 1.4rem;
-  }
-
-  .card p {
-      font-size: 0.9rem;
-  }
-
-  /* Для маленьких экранов — выводим карточки в одну колонку */
+  /* Карточки на мобильных */
   .cards-wrapper {
-      flex-direction: column;
-      align-items: center;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+  }
+
+  .card {
+    margin-top: 15px;
+    max-width: 90%;  /* Уменьшаем карточки еще больше на мобильных */
+    padding: 1rem;  /* Уменьшаем отступы для мобильных */
+  }
+
+  .card-title {
+    font-size: 1.2rem;  /* Уменьшаем размер заголовков */
+  }
+
+  .card-text {
+    font-size: 0.9rem;  /* Уменьшаем размер текста */
+  }
+
+  .card-price {
+    font-size: 1rem;  /* Уменьшаем шрифт цены */
+  }
+
+  /* Сделаем заголовок акций меньшим на мобильных */
+  .stocks-title-section {
+    font-size: 1.4rem;
+  }
+
+  /* Улучшаем сетку акций на мобильных */
+  .stocks-grid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); /* Меньшие элементы */
+    gap: 15px; /* Уменьшаем отступы */
+  }
+
+  .stocks-item {
+    padding: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Изменения в стиле каруселей */
+  .carousel-item img {
+    width: 100%;
+    height: auto;
+    object-fit: cover; /* Изображения не будут растягиваться */
+  }
+
+  .carousel-inner {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .carousel-control-prev, .carousel-control-next {
+    background-color: rgba(0, 0, 0, 0.5); /* Стрелки на карусели */
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
   }
 }
 
-/* Контейнер для карточек с акциями */
-.stocks-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Колонки с минимальной шириной 300px */
-  gap: 20px; /* Отступы между карточками */
-  padding: 30px;
-  max-width: 1200px;
-  margin: 0 auto;
-  box-sizing: border-box;
+.modal-footer button {
+  font-size: 12px; /* Уменьшить размер текста */
+  padding: 5px 10px; /* Уменьшить отступы внутри кнопок */
 }
-
-/* Стиль для каждой ячейки акции */
-.stocks-item {
-  background-color: #ffffff;
-  border-radius: 15px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Легкая тень */
-  padding: 25px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
-  position: relative;
-  height: 100%; /* Убираем зажатие высоты */
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-/* Эффект при наведении на ячейку */
-.stocks-item:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
-  background-color: #f9f9f9; /* Легкое изменение фона */
-}
-
-/* Иконки для акций */
-.stocks-item .icon {
-  font-size: 40px;
-  color: #007bff;
-  margin-bottom: 15px;
-  transition: transform 0.3s ease;
-}
-
-/* Увеличение иконки при наведении */
-.stocks-item:hover .icon {
-  transform: scale(1.2);
-}
-
-/* Заголовок акции */
-.stocks-item .stocks-title {
-  font-size: 1.75rem;
-  font-weight: bold;
-  color: #333;
-  margin-bottom: 15px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  line-height: 1.3;
-}
-
-/* Описание акции */
-.stocks-item .stocks-description {
-  font-size: 1.1rem;
-  color: #666;
-  margin-bottom: 20px;
-  line-height: 1.6;
-}
-
-

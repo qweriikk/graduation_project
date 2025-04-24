@@ -9,6 +9,7 @@ from django.views.generic import DetailView, ListView, View
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib import messages
 
 # from .models import Article
                
@@ -133,7 +134,82 @@ def seventeen_view(request):
     products = Product.objects.filter(category='seventeen')
     return render(request, 'Polls/seventeen.html', {'products': products})
     
-                
+@login_required
+def add_to_cart(request, pk):
+    product = get_object_or_404(Product, pk=pk)
+    cart, _ = Cart.objects.get_or_create(user=request.user)
+
+    # Ищем существующий CartItem
+    cart_item, created = CartItem.objects.get_or_create(cart=cart, product=product)
+    if created:
+        # Новый товар в корзине — сразу ставим quantity=1
+        cart_item.quantity = 1
+    else:
+        # Уже был — просто увеличиваем
+        cart_item.quantity += 1
+    cart_item.save()
+
+    return redirect('main')
+
+
+@login_required
+def increase_quantity(request, product_id):
+    cart = get_object_or_404(Cart, user=request.user)
+    product = get_object_or_404(Product, id=product_id)
+    cart_item = CartItem.objects.filter(cart=cart, product=product).first()
+
+    if cart_item:
+        cart_item.quantity += 1
+        cart_item.save()
+    else:
+        # Если вдруг не было — создаём
+        CartItem.objects.create(cart=cart, product=product, quantity=1)
+
+    return redirect('main')
+
+
+@login_required
+def decrease_quantity(request, product_id):
+    cart = get_object_or_404(Cart, user=request.user)
+    product = get_object_or_404(Product, id=product_id)
+    cart_item = get_object_or_404(CartItem, cart=cart, product=product)
+
+    if cart_item.quantity > 1:
+        cart_item.quantity -= 1
+        cart_item.save()
+    else:
+        cart_item.delete()
+
+    return redirect('main')
+
+
+@login_required
+def remove_from_cart(request, product_id):
+    cart = get_object_or_404(Cart, user=request.user)
+    product = get_object_or_404(Product, id=product_id)
+    CartItem.objects.filter(cart=cart, product=product).delete()
+    return redirect('main')
+
+
+@login_required
+def clear_cart(request):
+    cart = get_object_or_404(Cart, user=request.user)
+    cart.items.all().delete()
+    return redirect('main')
+
+
+@login_required
+def checkout(request):
+    cart = get_object_or_404(Cart, user=request.user)
+    if cart.items.exists():
+        # Здесь можно добавить логику создания заказа, отправки email и т.п.
+        cart.items.all().delete()
+        messages.success(request, "Покупка успешно оформлена!")
+    else:
+        messages.warning(request, "Корзина пуста.")
+    return redirect("main")
+
+
 
 # def register_view(request):
 #     # if request.user.is_authenticated:

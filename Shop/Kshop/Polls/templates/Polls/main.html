@@ -8,6 +8,24 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'Polls/styles.css' %}">
+    <style>
+      .btn-purple {
+        background-color: #8d7caf;
+        color: #fff;
+        border: none;
+      }
+      .btn-purple:hover {
+        background-color: #705c9c;
+        color: #fff;
+      }
+      .btn-purple:active {
+        background-color: #5f4a8a;
+      }
+      .btn-purple.btn-sm {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.85rem;
+      }
+    </style>
 </head>
   <body>
     <!-- <div class="container-fluid"> -->
@@ -156,35 +174,69 @@
       </div>
     </div>
     {% else %}
-    <div class="modal fade" id="exampleModalToggle3" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal_window modal-content">
-          <div class="close_close">
-              <!-- <button type="button_close" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
-            </div>
-          <div class="modal_header">
-            <label class="titte_window">Корзина</label>
-          </div>
+    {% if user.is_authenticated %}
+<div class="modal fade" id="exampleModalToggle3" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalToggleLabel">Корзина</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        {% if cart_items %}
           {% for item in cart_items %}
-            <div class="modal-body">
-              <div>
-                <div>{{ item.product.title }}</div>
-                <form method="post" action="{% url "remove_from_cart" item.product.id %}" class="modal_login_div d-flex justify-content-center">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <div class="flex-grow-1">
+                <p class="mb-0">{{ item.product.title }}</p>
+              </div>
+
+              <div class="d-flex align-items-center gap-2">
+                <!-- Минус -->
+                <form method="post" action="{% url 'decrease_quantity' item.product.id %}">
                   {% csrf_token %}
-                  <button class="log_in_modal" type="submit">Удалить</button>
+                  <button class="btn btn-purple btn-sm px-2 py-0" type="submit">−</button>
                 </form>
-              </div>  
+
+                <!-- Количество -->
+                <span class="px-2">{{ item.quantity }}</span>
+
+                <!-- Плюс -->
+                <form method="post" action="{% url 'increase_quantity' item.product.id %}">
+                  {% csrf_token %}
+                  <button class="btn btn-purple btn-sm px-2 py-0" type="submit">+</button>
+                </form>
+
+                <!-- Удалить -->
+                <form method="post" action="{% url 'remove_from_cart' item.product.id %}">
+                  {% csrf_token %}
+                  <button class="btn btn-purple btn-sm" type="submit">Удалить</button>
+                </form>
+              </div>
             </div>
           {% endfor %}
-          <div>
-            <form method="post" action="{% url "clear_cart" %}" class="modal_login_div d-flex justify-content-center">
-              {% csrf_token %}
-              <button class="log_in_modal" type="submit">Очистить корзину</button>
-            </form>  
-          </div>  
-        </div>
+        {% else %}
+          <p>Ваша корзина пуста.</p>
+        {% endif %}
+      </div>
+      <div class="modal-footer">
+        <form method="post" action="{% url 'clear_cart' %}">
+          {% csrf_token %}
+          <button class="btn btn-purple btn-sm" type="submit">Очистить корзину</button>
+        </form>
+        <form method="post" action="{% url 'checkout' %}">
+          {% csrf_token %}
+          <button class="btn btn-purple btn-sm" type="submit">Оформить заказ</button>
+        </form>
       </div>
     </div>
+  </div>
+</div>
+{% endif %}
+
+
+
+
+
     <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal_window modal-content">
