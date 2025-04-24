@@ -10,6 +10,8 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
+from .models import Order, OrderItem
+from .forms import OrderForm
 
 # from .models import Article
                
@@ -201,15 +203,44 @@ def clear_cart(request):
 @login_required
 def checkout(request):
     cart = get_object_or_404(Cart, user=request.user)
-    if cart.items.exists():
-        # Здесь можно добавить логику создания заказа, отправки email и т.п.
-        cart.items.all().delete()
-        messages.success(request, "Покупка успешно оформлена!")
+    items = cart.items.select_related('product').all()
+    total_price = sum(item.product.price * item.quantity for item in items)
+
+    if request.method == 'POST':
+        form = OrderForm(request.POST)
+        if form.is_valid():
+            order: Order = form.save(commit=False)
+            order.user = request.user
+            order.total_price = total_price
+            order.save()
+            # создаём позиции заказа
+            for item in items:
+                OrderItem.objects.create(
+                    order=order,
+                    product=item.product,
+                    quantity=item.quantity,
+                    price=item.product.price
+                )
+            # очищаем корзину
+            cart.items.all().delete()
+            messages.success(request, "Заказ успешно оформлен!")
+            return redirect('payment_success')
     else:
-        messages.warning(request, "Корзина пуста.")
-    return redirect("main")
+        form = OrderForm()
 
+    return render(request, 'Polls/checkout.html', {
+        'cart_items': items,
+        'total_price': total_price,
+        'form': form,
+    })
+    
+@login_required
+def payment_success(request):
+    return render(request, 'Polls/payment_success.html')
 
+def order_list(request):
+    orders = Order.objects.all()
+    return render(request, 'order_list.html', {'orders': orders})
 
 # def register_view(request):
 #     # if request.user.is_authenticated:

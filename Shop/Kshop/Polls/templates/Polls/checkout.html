@@ -1,0 +1,124 @@
+{% load static %}
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Оформление заказа</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+      /* Универсальный класс для иконок в хедере */
+      .header-icon {
+        width: 40px;
+        height: 40px;
+      }
+      /* Для корзины — чуть побольше */
+      .header-icon.cart-icon {
+        width: 50px;
+        height: 50px;
+      }
+      .btn-purple {
+        background-color: #8d7caf;
+        color: #fff;
+        border: none;
+      }
+      .btn-purple:hover {
+        background-color: #705c9c;
+      }
+      .order-summary {
+        background: #f8f9fa;
+        padding: 1rem;
+        border-radius: .5rem;
+        margin-bottom: 1.5rem;
+      }
+      .order-summary h4 {
+        margin-bottom: 1rem;
+        color: #4a0072;
+      }
+      .order-form .form-control {
+        margin-bottom: 1rem;
+      }
+      .checkout-wrapper {
+        display: flex;
+        gap: 2rem;
+        margin-top: 2rem;
+      }
+      .order-form {
+        background: #f9f9f9;
+        padding: 1.5rem;
+        border-radius: .5rem;
+        flex: 1;
+      }
+      .order-summary {
+        flex: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Хедер -->
+    <nav class="navbar navbar-light bg-light py-4">
+      <div class="container d-flex justify-content-between align-items-center">
+        <a class="navbar-brand" href="{% url 'main' %}">
+          <img src="{% static 'img/logo3.png' %}" width="120" height="100" class="img-fluid">
+        </a>
+
+        <form class="d-flex">
+          <input class="form-control me-2" type="search" placeholder="Поиск">
+          <button class="btn" type="submit">
+            <img src="{% static 'img/search.png' %}" width="30" height="30">
+          </button>
+        </form>
+
+        <div class="d-flex align-items-center gap-3">
+          <a href="#exampleModalToggle" data-bs-toggle="modal">
+            <img src="{% static 'img/avatar.png' %}" class="header-icon">
+          </a>
+          <a href="#">
+            <img src="{% static 'img/like.png' %}" class="header-icon">
+          </a>
+          <a href="#exampleModalToggle3" data-bs-toggle="modal">
+            <img src="{% static 'img/basket.png' %}" class="header-icon cart-icon">
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container py-5">
+      <h2 class="mb-4">Оформление заказа</h2>
+      <div class="checkout-wrapper">
+        <!-- Сводка заказа -->
+        <div class="order-summary">
+          <h4>Ваша корзина</h4>
+          {% for item in cart_items %}
+            <div class="d-flex justify-content-between">
+              <span>{{ item.product.title }} × {{ item.quantity }}</span>
+              <span>{{ item.product.price|floatformat:0 }} ₽</span>
+            </div>
+          {% endfor %}
+          <hr>
+          <div class="d-flex justify-content-between fw-bold">
+            <span>Итого:</span>
+            <span>{{ total_price|floatformat:0 }} ₽</span>
+          </div>
+        </div>
+
+        <!-- Форма покупателя -->
+        <div class="order-form">
+          <form method="post">
+            {% csrf_token %}
+            <input name="name"      class="form-control" type="text"  placeholder="Ваше имя" required>
+            <input name="email"     class="form-control" type="email" placeholder="Электронная почта" required>
+            <input name="address"   class="form-control" type="text"  placeholder="Адрес доставки" required>
+            <input name="phone"     class="form-control" type="tel"   placeholder="Телефон" required>
+            <div class="text-center mt-4">
+              <button type="submit" class="btn btn-purple px-4">Подтвердить заказ</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

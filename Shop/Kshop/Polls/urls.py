@@ -21,10 +21,12 @@ urlpatterns = [
     path('product/<int:pk>/add', views.add_to_cart, name='add_to_cart'),
     path('<int:product_id>/', views.remove_from_cart, name='remove_from_cart'),
     path('cart/clear/', views.clear_cart, name='clear_cart'),
-    path('cart/checkout/', views.checkout, name='checkout'),
     path('cart/increase/<int:product_id>/', views.increase_quantity, name='increase_quantity'),
     path('cart/decrease/<int:product_id>/', views.decrease_quantity, name='decrease_quantity'),
-
+    
+    path('orders/', views.order_list, name='order_list'),
+     path('cart/checkout/', views.checkout, name='checkout'),
+    path('cart/checkout/success/', views.payment_success, name='payment_success'),
     
     path('enhypen/', views.enhypen_view, name='enhypen'),
     path('merch.html', views.merch_view, name='merch'),
