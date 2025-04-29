@@ -28,11 +28,11 @@ class CartItem(models.Model):
         return f"{self.quantity} of {self.product.title} in {self.cart.user.username}'s cart"   
     
 class Order(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     name = models.CharField("Имя", max_length=100)
     phone = models.CharField("Телефон", max_length=20)
     address = models.TextField("Адрес")
-    total_price = models.DecimalField("Сумма заказа", max_digits=10, decimal_places=2)
+    total_price = models.DecimalField("Сумма заказа", max_digits=10, decimal_places=2, default=0)
     created_at = models.DateTimeField(auto_now_add=True)
 
 class OrderItem(models.Model):

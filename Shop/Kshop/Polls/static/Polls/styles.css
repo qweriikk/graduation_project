@@ -1,29 +1,30 @@
 body {
   overflow-x: hidden;
-  font-family: Arial, sans-serif;
-}
-
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
-
-.container-fluid {
-  width: 100%;
-  padding: 0;
 }
 
 .list-group {
+  width: 460px;
   position: sticky;
   top: 30px;
-  width: auto;
-  max-width: 250px;
-  flex-shrink: 0;
+}
+
+.container-fluid {
+  align-items: center;
+  width: 500px;
+}
+
+.header_knob {
+  align-items: center;
+  width: 500px;
+}
+
+.navbar-brand {
+  align-items: center;
+  width: 500px;
 }
 
 .marginleft {
-  margin-left: 0px;
+  margin-left : 20px;
 }
 
 .qq {
@@ -32,217 +33,203 @@ html, body {
 
 .cards-wrapper {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-  padding: 20px;
 }
 
-/* Карточки продуктов */
-.card {
-  margin-top: 20px;
-  border: none;
-  width: 100%;
-  max-width: 230px;  /* Уменьшаем максимальную ширину карточек */
-  border-radius: 1rem;
-  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
-  padding: 1rem;
-  text-align: center;
-  background-color: #8d7caf;
-  color: white;
-  transition: transform 0.3s ease;
+.img_group {
+  margin: 15px;
 }
 
-.card:hover {
-  transform: translateY(-5px); /* Легкий эффект на карточке */
+* модальное окно авторизации/регистрации */
+.close_close{
+padding-top: 10px;
+padding-right: 10px;
+display: flex;
+justify-content: right;
 }
-
-.card-title {
-  font-size: 1.4rem;  /* Уменьшаем размер шрифта */
-  font-weight: bold;
-  margin-bottom: 10px;
+.modal_header{
+padding-top: 30px;
+/* background-color: aqua; */
+display: flex;
+justify-content: center;
 }
-
-.card-text {
-  font-size: 0.8rem;  /* Уменьшаем размер текста */
-  margin-bottom: 10px;
+.titte_window{
+font-size: 40px;
+color: #041F27;
+font-weight: 400;
 }
-
-/* Для цен на карточках */
-.card-price {
-  font-size: 1.1rem;  /* Уменьшаем шрифт цены */
-  font-weight: bold;
-  color: #f1f1f1;
-  margin-bottom: 15px;
+.email_div{
+margin-top: 50px;
 }
-
-/* Изображение карточки */
-.card img {
-  max-width: 100%;
-  height: 150px;  /* Ограничиваем высоту изображений */
-  object-fit: cover;  /* Устанавливаем обрезку изображения */
-  border-radius: 10px;
+.password_div{
+margin-top: 30px;
 }
-
-/* Разные фоны для карточек */
-.bg-purple-1 {
-  background-color: #a58edb;
+.password_div_2{
+margin-top: 30px;
 }
-
-.bg-purple-2 {
-  background-color: #8d7caf;
+input.modal_input{
+font-size: 24px;
+padding-left: 24px;
+border-radius: 10px;
+border: #D9D9D9 3px solid;
+width: 300px;
+height: 60px;
 }
-
-.bg-purple-3 {
-  background-color: #705c9c;
+input.modal_input:focus{
+outline: #D9D9D9;
+/* border: #D9D9D9 3px solid; */
+}
+.modal_login_div{
+margin-top: 50px;
+}
+.log_in_modal{
+color: #fff;
+font-size: 28px;
+height: 65px;
+width: 240px;
+border: none;
+background-color: #8d7caf !important;
+border-radius: 10px;
+}
+/* модалка авторизованного пользователя */
+.modal_header_auth{
+margin-top: 20px !important;
+padding-left: 50px;
+padding-right: 50px;
+}
+.email_label{
+font-size: 28px;
+font-weight: 400;
+color: #8d7caf;
+}
+.email{
+font-size: 26px;
+font-weight: 400;
+color: #8d7caf;
+}
+.linked_cards{
+font-size: 24px;
+padding-left: 35px;
+margin-top: 30px !important;
+}
+.card_card{
+padding-left: 30px;
+margin-top: 30px !important;
+}
+.card_bank{
+border-radius: 5px;
+color: #fff !important;
+font-size: 16px;
+height: 67px !important;
+width: 120px;
+background-color: #8d7caf !important;
+border: none !important;
+}
+.number{
+display: flex;
+justify-content: right;
+padding-right: 10px;
+padding-top: 5px;
+}
+.date_active{
+display: flex;
+justify-content: left;
+padding-left: 10px;
+padding-top: 5px;
+}
+.btn_unite{
+display: flex;
+justify-content: left;
+align-items: center;
+}
+.untie_it{
+color: #fff !important;
+height: 45px;
+width: 180px;
+border-radius: 10px;
+border: none;
+background-color: #8d7caf;
+font-size: 20px;
+}
+.modal_logout_div{
+margin-top: 50px;
+padding-bottom: 10px;
+}
+.log_out_modal{
+color: #fff;
+font-size: 28px;
+height: 65px;
+width: 240px;
+border: none;
+background-color: #8d7caf;
+border-radius: 10px;
 }
 
 .content {
-  width: 100%;
-  padding: 20px;
+width: 97%;
+/* height: 400px; */
+/* background-color: aquamarine; */
+}
+.card{
+margin-top: 30px;
+border: none !important;
+}
+.image_card{
+height: 350px;
+width: 350px;
+}
+.title_product{
+font-size: 32px;
+font-weight: 500;
+}
+.price_product{
+margin-top: 10px;
+font-size: 30px;
+font-weight: 400;
 }
 
-.navbar-brand {
-  width: auto;
+.btn_buy_btn_favo{
+margin-top: 20px;
 }
-
-.header_knob {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
+.button_buy{
+display: flex;
+justify-content: center;
+align-items: center;
+border-radius: 10px;
+border: #8d7caf 2px solid;
+background-color: #fff;
+color: #888;
+height: 50px;
+width: 220px;
+font-size: 20px;
 }
-
-.favorites, .button_buy {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.basket_img{
+padding-right: 10px;
+height: 35px;
+width: 35px;
+/* margin-top: -6px; */
 }
-
-.btn_buy_btn_favo {
-  margin-top: 20px;
+.favorites{
+display: flex;
+/* justify-content: center; */
+align-items: center;
 }
-
-.button_buy {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 10px;
-  border: #8d7caf 2px solid;
-  background-color: #fff;
-  color: #888;
-  height: 50px;
-  width: 220px;
-  font-size: 20px;
+.favo_button{
+height: 50px;
+width: 50px;
+border: #fff 1px solid;
+border-radius: 10px;
+background-color: #fff;
 }
-
-.basket_img {
-  padding-right: 10px;
-  height: 35px;
-  width: 35px;
+.favo_img{
+height: 30px;
+width: 35px;
 }
-
-.favo_button {
-  height: 50px;
-  width: 50px;
-  border: #fff 1px solid;
-  border-radius: 10px;
-  background-color: #fff;
-}
-
-.favo_img {
-  height: 30px;
-  width: 35px;
-}
-
-.description_product {
-  margin-top: 10px;
-  font-size: 18px;
+.description_product{
+margin-top: 10px;
+font-size: 18px;
 }
 
 .anyClass {
-  height: 150px;
-  overflow-y: scroll;
-}
-
-/* Мобильная адаптивность */
-@media (max-width: 768px) {
-  .list-group {
-    max-width: 100%;
-    margin: 0;
-    padding: 0;
-  }
-
-  .content {
-    padding: 10px;
-  }
-
-  .navbar-brand img {
-    width: 80px;
-    height: 70px;
-  }
-
-  /* Карточки на мобильных */
-  .cards-wrapper {
-    flex-direction: column;
-    align-items: center;
-    padding: 0;
-  }
-
-  .card {
-    margin-top: 15px;
-    max-width: 90%;  /* Уменьшаем карточки еще больше на мобильных */
-    padding: 1rem;  /* Уменьшаем отступы для мобильных */
-  }
-
-  .card-title {
-    font-size: 1.2rem;  /* Уменьшаем размер заголовков */
-  }
-
-  .card-text {
-    font-size: 0.9rem;  /* Уменьшаем размер текста */
-  }
-
-  .card-price {
-    font-size: 1rem;  /* Уменьшаем шрифт цены */
-  }
-
-  /* Сделаем заголовок акций меньшим на мобильных */
-  .stocks-title-section {
-    font-size: 1.4rem;
-  }
-
-  /* Улучшаем сетку акций на мобильных */
-  .stocks-grid {
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); /* Меньшие элементы */
-    gap: 15px; /* Уменьшаем отступы */
-  }
-
-  .stocks-item {
-    padding: 15px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  }
-
-  /* Изменения в стиле каруселей */
-  .carousel-item img {
-    width: 100%;
-    height: auto;
-    object-fit: cover; /* Изображения не будут растягиваться */
-  }
-
-  .carousel-inner {
-    width: 100%;
-    overflow: hidden;
-  }
-
-  .carousel-control-prev, .carousel-control-next {
-    background-color: rgba(0, 0, 0, 0.5); /* Стрелки на карусели */
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-  }
-}
-
-.modal-footer button {
-  font-size: 12px; /* Уменьшить размер текста */
-  padding: 5px 10px; /* Уменьшить отступы внутри кнопок */
+height:150px;
+overflow-y: scroll;
 }
