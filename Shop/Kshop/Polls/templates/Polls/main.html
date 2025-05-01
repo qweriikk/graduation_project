@@ -78,10 +78,10 @@
                   <img src="{%static 'img/proba.jpg'%}" class="d-block w-100" alt="...">
                 </div>
                   <div class="img_group">
-                    <img src="{%static 'img/proba2.jpg'%}" class="d-block w-100" alt="...">
+                    <img src="{%static 'img/proba3.jpg'%}" class="d-block w-100" alt="...">
                   </div>
                     <div class="img_group">
-                      <img src="{%static 'img/proba3.jpg'%}" class="d-block w-100" alt="...">
+                      <img src="{%static 'img/proba2.jpg'%}" class="d-block w-100" alt="...">
                     </div>
                 </div>
               </div>
@@ -121,26 +121,23 @@
               <span class="visually-hidden">Следующий</span>
             </button>
           </div>
-            <div class="row">
-              <label class="fs-2 fw-bold text-center qq">Новинки</label>
-            </div>
-            <div class="row row-cols-3">
+          <div class="row">
+            <label class="fs-2 fw-bold text-center qq">Новинки</label>
+          </div>
+          <div class="row row-cols-3">
             {% for product in products %}  
             <div class="col p-5">
-              <div class="row p-2 border bg-light">
-                <div class="d-flex justify-content-center align-items-center">
-                 <img src='{{product.photo.url}}' alt='Альтернативный текст' width='250' height='250'>
-                </div>
-                <div class="d-flex justify-content-center align-items-center">
-                  <a href="{% url "post-detail" product.id %}" class="text-center fs-5 link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">{{product.title}}</a>
-                </div>
-                <div class="d-flex justify-content-center align-items-center">
-                  <label class="text-center fs-5">{{product.price}} руб.</label>
-                </div>
+              <div class="card">
+                <a href="{% url 'post-detail' product.id %}" class="text-decoration-none">
+                  <div class="card-body">
+                    <img src="{{ product.photo.url }}" alt="Фото товара" class="card-img-top">
+                    <h5 class="card-title">{{ product.title }}</h5>
+                    <p class="card-price">{{ product.price }} руб.</p>
+                  </div>
+                </a>
               </div>
             </div>
             {% endfor %}
-            </div>
           </div>
         </div>
       </div>

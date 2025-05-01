@@ -37,17 +37,17 @@
           </div>   
     </nav> 
     <div class="row">
-      <div class="container col-3 marginleft">
+      <div class="container col-3 marginleft mt-3">
         <div class="list-group col">
-            <a class="dropdown-item" href="stocks.html">Акции</a>
-            <a class="dropdown-item" href="new.html">Новинки</a>
-            <a class="list-group-item dropdown-toggle" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" href="#">Альбомы</a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="seventeen.html">Seventeen</a></li>
-              <li><a class="dropdown-item" href="enhypen.html">Enhypen</a></li>
-              <li><a class="dropdown-item" href="straykids.html">Stray Kids</a></li>
-            </ul>
-            <a class="dropdown-item" href="merch.html">Мерч</a>
+          <a class="dropdown-item" href="{% url 'stocks' %}">Акции</a>
+          <a class="dropdown-item" href="{% url 'main' %}">Новинки</a>
+          <a class="list-group-item dropdown-toggle" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" href="#">Альбомы</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{% url 'seventeen' %}">Seventeen</a></li>
+            <li><a class="dropdown-item" href="{% url 'enhypen' %}">Enhypen</a></li>
+            <li><a class="dropdown-item" href="{% url 'straykids' %}">Stray Kids</a></li>
+          </ul>
+          <a class="dropdown-item" href="{% url 'merch' %}">Мерч</a>
         </div>   
       </div>
       <div class="row col-9">
@@ -55,7 +55,7 @@
             <div class="row">
                 <label class="fs-2 fw-bold text-center qq">Товар</label>
             </div>
-            <form method="post" action="{% url "add_to_cart" object.id %}" class="card ps-5">
+            <form method="post" action="{% url "add_to_cart" object.id %}" class="product-detail ps-5">
                 {% csrf_token %}
                 <div class="image_info row">
                     <div class="img_card col-3">
@@ -184,56 +184,7 @@
         </div>
       </div>
     </div>
-<!--  -->
 
-  <!-- окно авторизованного пользователя -->
-<div class="modal fade" id="exampleModalToggle3" aria-hidden="true" aria-labelledby="exampleModalToggleLabel3" tabindex="-1">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal_window modal-content">
-      <div class="modal_header_auth">
-        <label class="email_label col">Почта:</label> <br>
-        <label class="email col ps-0">{{user.email}}</label>
-      </div>
-      <div class="modal-body">
-        <label class="linked_cards col">Привязанные карты</label>
-        <!-- сущ карта -->
-        <div class="card_card row">
-          <div class="col-5">
-              <div class="card_bank ps-0">
-                  <div class="number">
-                      <label>..2029</label>
-                  </div>
-                  <div class="date_active">
-                      <label>19/02</label>
-                  </div>
-              </div>
-          </div>
-          <div class="col-7 ps-0">
-              <div class="btn_unite">
-                  <button class="untie_it">Отвязать</button>
-              </div>
-          </div>
-        </div>
-        <!-- новая карта -->
-        <div class="card_card row">
-          <div class="col-5">
-              <img src="{% static 'pols/images/add.png' %}">
-          </div>
-          <div class="col-7 ps-0">
-              <div class="btn_unite">
-                  <button class="untie_it">Добавить карту</button>
-              </div>
-          </div>
-        </div>
-        <!--  -->
-        <form class="modal_logout_div d-flex justify-content-center" method="post" action=".">
-            {% csrf_token %}
-          <button class="log_out_modal">Выйти</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>   
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   </body>
 </html>
