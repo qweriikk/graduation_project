@@ -274,3 +274,16 @@ font-size: 18px;
 height:150px;
 overflow-y: scroll;
 }
+
+.text-purple {
+  color: #8d7caf !important;
+}
+
+.btn-purple {
+  background-color: #8d7caf;
+  color: #fff;
+  border: none;
+}
+.btn-purple:hover {
+  background-color: #705c9c;
+}

@@ -10,68 +10,70 @@
   <body>
     <nav class="navbar navbar-light bg-light py-4" style="width: 100%;">
       <div class="container">
-          <a class="navbar-brand" href="{% url "main" %}">
-              <img class="img-fluid me-1" src="{%static 'img/logo3.png'%}" width="120px" height="100px">
-          </a>
-          <div class="container-fluid">
-            <form class="d-flex">
-              <input class="form-control me-2" type="search" placeholder="Поиск" aria-label="Поиск">
-              <button class="btn" type="submit"><img style="width: 30px; height: 30px;" src="{%static 'img/search.png'%}"/></button>
-            </form>
-          </div>
+        <a class="navbar-brand" href="{% url "main" %}">
+          <img class="img-fluid me-1" src="{% static 'img/logo3.png' %}" width="120px" height="100px">
+        </a>
+        <div class="container-fluid">
+          <form class="d-flex">
+            <input class="form-control me-2" type="search" placeholder="Поиск" aria-label="Поиск">
+            <button class="btn" type="submit"><img style="width: 30px; height: 30px;" src="{% static 'img/search.png' %}" /></button>
+          </form>
+        </div>
       </div>
       <div class="header_knob">
         <div class="container">
-            <a class="navbar-brand" href="#exampleModalToggle" data-bs-toggle="modal">
-                <img class="img-fluid me-4" src="{%static 'img/avatar.png'%}" width="40px" height="40px">
-            </a>
-            <a class="navbar-brand" href="">
-                <img class="img-fluid me-4" src="{%static 'img/like.png'%}" width="40px" height="40px">
-            </a>
-            <a class="navbar-brand" href="#exampleModalToggle3" data-bs-toggle="modal">
-                <img class="img-fluid me-4" src="{%static 'img/basket.png'%}" width="50px" height="50px">
-            </a>
-        </div>   
-  </nav> 
+          <a class="navbar-brand" href="#exampleModalToggle" data-bs-toggle="modal">
+            <img class="img-fluid me-4" src="{% static 'img/avatar.png' %}" width="40px" height="40px">
+          </a>
+          <a class="navbar-brand" href="{% url 'favorites' %}">
+            <img class="img-fluid me-4" src="{% static 'img/like.png' %}" width="40px" height="40px">
+          </a>
+          <a class="navbar-brand" href="#exampleModalToggle3" data-bs-toggle="modal">
+            <img class="img-fluid me-4" src="{% static 'img/basket.png' %}" width="50px" height="50px">
+          </a>
+        </div>
+      </div>
+    </nav>
+
     <div class="row">
       <div class="container col-3 marginleft mt-3">
         <div class="list-group col">
-            <a class="dropdown-item" href="{% url 'stocks' %}">Акции</a>
-            <a class="dropdown-item" href="{% url 'main' %}">Новинки</a>
-            <a class="list-group-item dropdown-toggle" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" href="#">Альбомы</a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="{% url 'seventeen' %}">Seventeen</a></li>
-              <li><a class="dropdown-item" href="{% url 'enhypen' %}">Enhypen</a></li>
-              <li><a class="dropdown-item" href="{% url 'straykids' %}">Stray Kids</a></li>
-            </ul>
-            <a class="dropdown-item" href="{% url 'merch' %}">Мерч</a>
-        </div>   
-      </div>
-      <div class="row col-9">
-        <div class="content">
-            <div class="row">
-              <label class="fs-2 fw-bold text-center qq">Enhypen</label>
-            </div>
-            <div class="row row-cols-3">
-            {% for product in products %}
-            <div class="col p-5">
-              <div class="row p-2 border bg-light">
-                <div class="d-flex justify-content-center align-items-center">
-                 <img src="{{ product.photo.url }}" alt="{{ product.title }}" width="250" height="250">
-                </div>
-                <div class="d-flex justify-content-center align-items-center">
-                  <a class="text-center fs-5 link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">{{ product.title }}</a>
-                </div>
-                <div class="d-flex justify-content-center align-items-center">
-                  <label class="text-center fs-5">{{ product.price }} руб.</label>
-                </div>
-              </div>
-            </div>
-            {% endfor %}
-            </div>
+          <a class="dropdown-item" href="{% url 'stocks' %}">Акции</a>
+          <a class="dropdown-item" href="{% url 'main' %}">Новинки</a>
+          <a class="list-group-item dropdown-toggle" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" href="#">Альбомы</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{% url 'seventeen' %}">Seventeen</a></li>
+            <li><a class="dropdown-item" href="{% url 'enhypen' %}">Enhypen</a></li>
+            <li><a class="dropdown-item" href="{% url 'straykids' %}">Stray Kids</a></li>
+          </ul>
+          <a class="dropdown-item" href="{% url 'merch' %}">Мерч</a>
         </div>
       </div>
-    </div>   
+
+      <div class="row col-9">
+        <div class="content">
+          <div class="row">
+            <label class="fs-2 fw-bold text-center qq">Enhypen</label>
+          </div>
+          <div class="row row-cols-3 g-4">
+            {% for product in products %}
+              <div class="col">
+                <div class="card h-100">
+                  <a href="{% url 'post-detail' product.id %}" class="text-decoration-none">
+                    <img src="{{ product.photo.url }}" class="card-img-top" alt="{{ product.title }}">
+                    <div class="card-body text-center">
+                      <h5 class="card-title text-purple">{{ product.title }}</h5>
+                      <p class="fw-bold text-purple">{{ product.price }} руб.</p>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   </body>
 </html>

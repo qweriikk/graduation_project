@@ -1,15 +1,16 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
+from django.conf import settings
 
-# Create your models here.
+
 class Product(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField(max_length=2500)
     date_posted = models.DateTimeField(default=timezone.now)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     photo = models.ImageField(upload_to="images/")
-    category = models.CharField(max_length=255, default='Без категории')  # Задали значение по умолчанию
+    category = models.CharField(max_length=255, default='Без категории')
 
     def __str__(self):
         return self.title
@@ -40,3 +41,13 @@ class OrderItem(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField()
     price = models.DecimalField(max_digits=10, decimal_places=2)    
+    
+class Favorite(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = ('user', 'product')
+
+    def __str__(self):
+        return f"{self.user.username} -> {self.product.title}"

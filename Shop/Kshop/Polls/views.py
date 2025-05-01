@@ -12,6 +12,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from .models import Order, OrderItem
 from .forms import OrderForm
+from .models import Product, Favorite
 
 # from .models import Article
                
@@ -42,7 +43,7 @@ class ProductListViewNew(ListView):
 class ProductDetailView(DetailView):
     model = Product
     template_name="Polls/product_description.html"
-    context_object_name = 'object'
+    context_object_name = 'product'
     fields = ['title', 'description', 'price','photo']
     
 class CartDetailView(LoginRequiredMixin, ListView):
@@ -241,6 +242,24 @@ def payment_success(request):
 def order_list(request):
     orders = Order.objects.all()
     return render(request, 'order_list.html', {'orders': orders})
+
+@login_required
+def favorites_view(request):
+    # Получаем все Favorite-объекты текущего пользователя
+    favs = Favorite.objects.filter(user=request.user).select_related('product')
+    return render(request, 'Polls/favorites.html', {'favorites': favs})
+
+@login_required
+def add_favorite(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    Favorite.objects.get_or_create(user=request.user, product=product)
+    return redirect(request.META.get('HTTP_REFERER', 'main'))
+
+@login_required
+def remove_favorite(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    Favorite.objects.filter(user=request.user, product=product).delete()
+    return redirect('favorites')
 
 # def register_view(request):
 #     # if request.user.is_authenticated:

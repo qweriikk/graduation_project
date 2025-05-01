@@ -25,8 +25,12 @@ urlpatterns = [
     path('cart/decrease/<int:product_id>/', views.decrease_quantity, name='decrease_quantity'),
     
     path('orders/', views.order_list, name='order_list'),
-     path('cart/checkout/', views.checkout, name='checkout'),
+    path('cart/checkout/', views.checkout, name='checkout'),
     path('cart/checkout/success/', views.payment_success, name='payment_success'),
+    
+    path('add_favorite/<int:product_id>/', views.add_favorite, name='add_to_favorites'),
+    path('favorites/', views.favorites_view, name='favorites'),
+    path('favorites/remove/<int:product_id>/', views.remove_favorite, name='remove_favorite'),
     
     path('enhypen/', views.enhypen_view, name='enhypen'),
     path('merch.html', views.merch_view, name='merch'),
