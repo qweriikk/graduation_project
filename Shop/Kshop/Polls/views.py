@@ -13,6 +13,7 @@ from django.contrib import messages
 from .models import Order, OrderItem
 from .forms import OrderForm
 from .models import Product, Favorite
+from .models import Category, Product
 
 # from .models import Article
                
@@ -114,27 +115,31 @@ class LoginView(View):
         return redirect("main")   
     
 def enhypen_view(request):
-    products = Product.objects.filter(category='enhypen')
+    category = get_object_or_404(Category, name__iexact='enhypen')
+    products = Product.objects.filter(category=category)
     return render(request, 'Polls/enhypen.html', {'products': products})
 
 def merch_view(request):
-    products = Product.objects.filter(category='merch')
+    category = get_object_or_404(Category, name__iexact='merch')
+    products = Product.objects.filter(category=category)
     return render(request, 'Polls/merch.html', {'products': products})
 
 def new_view(request):
-    products = Product.objects.filter(category='new')
+    category = get_object_or_404(Category, name__iexact='new')
+    products = Product.objects.filter(category=category)
     return render(request, 'Polls/new.html', {'products': products})
 
 def straykids_view(request):
-    products = Product.objects.filter(category='straykids')
+    category = get_object_or_404(Category, name__iexact='straykids')
+    products = Product.objects.filter(category=category)
     return render(request, 'Polls/straykids.html', {'products': products})
 
 def stocks_view(request):
-    products = Product.objects.filter(category='stocks')
-    return render(request, 'Polls/stocks.html', {'products': products})
+    return render(request, 'Polls/stocks.html')
 
 def seventeen_view(request):
-    products = Product.objects.filter(category='seventeen')
+    category = get_object_or_404(Category, name__iexact='seventeen')
+    products = Product.objects.filter(category=category)
     return render(request, 'Polls/seventeen.html', {'products': products})
     
 @login_required
@@ -260,6 +265,19 @@ def remove_favorite(request, product_id):
     product = get_object_or_404(Product, id=product_id)
     Favorite.objects.filter(user=request.user, product=product).delete()
     return redirect('favorites')
+
+def category_view(request, category_name):
+    category = get_object_or_404(Category, name__iexact=category_name)
+    products = Product.objects.filter(category=category)
+    return render(request, f'Polls/{category_name.lower()}.html', {
+        'products': products,
+        'category': category,
+    })
+    
+@login_required
+def my_orders(request):
+    orders = Order.objects.filter(user=request.user).order_by('-created_at')
+    return render(request, 'Polls/my_orders.html', {'orders': orders})    
 
 # def register_view(request):
 #     # if request.user.is_authenticated:

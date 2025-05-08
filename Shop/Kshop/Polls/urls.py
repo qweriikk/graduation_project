@@ -4,19 +4,18 @@ from .views import ProductDetailView, ProductListView, RegisterView, LoginView, 
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
-    # path('', ProductListView.as_view(), name="main"),
+    # Путь для главной страницы
     path('', ProductListViewNew.as_view(), name="main"),
-    # path('', CartDetailView.as_view(), name="cart-detail"),
+    
+    # Путь для регистрации и входа
     path('register/', RegisterView.as_view(), name="register"),
     path('login/', LoginView.as_view(), name="login"),
     path('logout/', auth_views.LogoutView.as_view(next_page='/'), name='logout'),
     
-    # path('description', views.product_description, name="product_description"),
-    
-    # описание продукта
+    # Описание продукта
     path('product/<int:pk>/', ProductDetailView.as_view(), name='post-detail'),
     
-    # функционал корзины
+    # Корзина
     path('cart/', views.cart_detail, name='cart_detail'),
     path('product/<int:pk>/add', views.add_to_cart, name='add_to_cart'),
     path('<int:product_id>/', views.remove_from_cart, name='remove_from_cart'),
@@ -24,19 +23,27 @@ urlpatterns = [
     path('cart/increase/<int:product_id>/', views.increase_quantity, name='increase_quantity'),
     path('cart/decrease/<int:product_id>/', views.decrease_quantity, name='decrease_quantity'),
     
+    # Заказы
     path('orders/', views.order_list, name='order_list'),
+    path('my-orders/', views.my_orders, name='my_orders'),
     path('cart/checkout/', views.checkout, name='checkout'),
     path('cart/checkout/success/', views.payment_success, name='payment_success'),
     
+    # Избранное
     path('add_favorite/<int:product_id>/', views.add_favorite, name='add_to_favorites'),
     path('favorites/', views.favorites_view, name='favorites'),
     path('favorites/remove/<int:product_id>/', views.remove_favorite, name='remove_favorite'),
     
-    path('enhypen/', views.enhypen_view, name='enhypen'),
+    path('stocks/', views.stocks_view, name='stocks'),
+    
+    # Статичные страницы категорий 
     path('merch.html', views.merch_view, name='merch'),
     path('new/', views.new_view, name='new'),
     path('straykids/', views.straykids_view, name='straykids'),
-    path('stocks/', views.stocks_view, name='stocks'),
     path('seventeen/', views.seventeen_view, name='seventeen'),
+    path('enhypen/', views.enhypen_view, name='enhypen'),
     
+    # Динамичные категории
+    path('category/<str:category_name>/', views.category_view, name='category_view'),
+
 ]

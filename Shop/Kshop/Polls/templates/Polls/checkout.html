@@ -107,10 +107,12 @@
         <div class="order-form">
           <form method="post">
             {% csrf_token %}
-            <input name="name"      class="form-control" type="text"  placeholder="Ваше имя" required>
-            <input name="email"     class="form-control" type="email" placeholder="Электронная почта" required>
-            <input name="address"   class="form-control" type="text"  placeholder="Адрес доставки" required>
-            <input name="phone"     class="form-control" type="tel"   placeholder="Телефон" required>
+            <input name="name" class="form-control" type="text" placeholder="Ваше имя" required>
+            <input name="email" class="form-control" type="email" placeholder="Электронная почта" required>
+            <input name="address" class="form-control" type="text" placeholder="Адрес доставки" required>
+            <input name="phone" class="form-control" type="tel" maxlength="15" pattern="[0-9]+" placeholder="Телефон" required>
+            <input name="card_number" class="form-control" type="text" maxlength="19" pattern="[0-9 ]+" placeholder="Номер карты" required>
+          
             <div class="text-center mt-4">
               <button type="submit" class="btn btn-purple px-4">Подтвердить заказ</button>
             </div>

@@ -10,7 +10,7 @@
   <body>
     <nav class="navbar navbar-light bg-light py-4" style="width: 100%;">
       <div class="container">
-        <a class="navbar-brand" href="{% url "main" %}">
+        <a class="navbar-brand" href="{% url 'main' %}">
           <img class="img-fluid me-1" src="{% static 'img/logo3.png' %}" width="120px" height="100px">
         </a>
         <div class="container-fluid">
@@ -43,7 +43,7 @@
           <a class="list-group-item dropdown-toggle" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" href="#">Альбомы</a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="{% url 'seventeen' %}">Seventeen</a></li>
-            <li><a class="dropdown-item" href="{% url 'enhypen' %}">Enhypen</a></li>
+            <li><a class="dropdown-item" href="{% url 'category_view' 'enhypen' %}">Enhypen</a></li>
             <li><a class="dropdown-item" href="{% url 'straykids' %}">Stray Kids</a></li>
           </ul>
           <a class="dropdown-item" href="{% url 'merch' %}">Мерч</a>
@@ -58,12 +58,12 @@
           <div class="row row-cols-3 g-4">
             {% for product in products %}
               <div class="col">
-                <div class="card h-100">
+                <div class="card h-100" style="width: 16rem;">
                   <a href="{% url 'post-detail' product.id %}" class="text-decoration-none">
-                    <img src="{{ product.photo.url }}" class="card-img-top" alt="{{ product.title }}">
-                    <div class="card-body text-center">
-                      <h5 class="card-title text-purple">{{ product.title }}</h5>
-                      <p class="fw-bold text-purple">{{ product.price }} руб.</p>
+                    <img src="{{ product.photo.url }}" class="card-img-top" alt="{{ product.title }}" style="height: 180px; object-fit: contain;">
+                    <div class="card-body text-center p-3">
+                      <h5 class="card-title text-purple mb-2" style="font-size: 1.1rem;">{{ product.title }}</h5>
+                      <p class="fw-bold text-purple mb-0" style="font-size: 1rem;">{{ product.price }} руб.</p>
                     </div>
                   </a>
                 </div>

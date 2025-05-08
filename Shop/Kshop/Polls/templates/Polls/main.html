@@ -61,11 +61,11 @@
           <a class="dropdown-item" href="{% url 'main' %}">Новинки</a>
           <a class="list-group-item dropdown-toggle" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" href="#">Альбомы</a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="{% url 'seventeen' %}">Seventeen</a></li>
-            <li><a class="dropdown-item" href="{% url 'enhypen' %}">Enhypen</a></li>
-            <li><a class="dropdown-item" href="{% url 'straykids' %}">Stray Kids</a></li>
+            <li><a class="dropdown-item" href="{% url 'category_view' 'seventeen' %}">Seventeen</a></li>
+            <li><a class="dropdown-item" href="{% url 'category_view' 'enhypen' %}">Enhypen</a></li>
+            <li><a class="dropdown-item" href="{% url 'category_view' 'straykids' %}">Stray Kids</a></li>
           </ul>
-          <a class="dropdown-item" href="{% url 'merch' %}">Мерч</a>
+          <a class="dropdown-item" href="{% url 'category_view' 'merch' %}">Мерч</a>
         </div>   
       </div>
       <div class="row col-9">
@@ -239,12 +239,13 @@
           <div class="modal_header">
             <label class="titte_window">Выйти из аккаунта?</label>
           </div>
-          <form class="modal-body" method="post" action="{% url "logout" %}">
-              {% csrf_token %}
-            <div class="modal_login_div d-flex justify-content-center">
-              <button class="log_in_modal" name="login">Выйти</button>
-            </div>
-          </form>         
+          <div class="modal_footer d-flex justify-content-center">
+            <a href="{% url 'my_orders' %}" class="btn btn-purple btn-sm me-2">Мои заказы</a>
+            <form method="post" action="{% url "logout" %}">
+            {% csrf_token %}
+            <button class="log_in_modal" name="login">Выйти</button>
+          </form>
+          </div>   
         </div>
       </div>
     </div>
