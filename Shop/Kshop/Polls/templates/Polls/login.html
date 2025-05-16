@@ -3,7 +3,7 @@
 {% block content %}
 <div class="container mt-5 col-md-6">
 
-  <h2 class="mb-4" style="color: #8d7caf !important;">Регистрация</h2>
+  <h2 class="mb-4" style="color: #8d7caf;">Вход</h2>
 
   {% if error %}
     <div style="background-color: #f3e8ff; border: 2px solid #8d7caf; border-radius: 10px; padding: 15px; color: #8d7caf; font-weight: 500; margin-bottom: 20px;">
@@ -22,11 +22,13 @@
         {% endif %}
       </div>
     {% endfor %}
-    <button type="submit" class="btn btn-purple" style="background-color: #8d7caf !important; color: white !important; border: none !important;">Зарегистрироваться</button>
+
+    <button type="submit" class="btn btn-purple" style="background-color: #8d7caf !important; color: white !important; border: none !important;">Войти</button>
   </form>
 
   <p class="mt-3">
-    Уже есть аккаунт? <a href="{% url 'login' %}" class="registr_button" style="color: #8d7caf; font-weight: 600;">Войти</a>
+    Нет аккаунта? 
+    <a href="{% url 'register' %}" class="registr_button" style="color: #8d7caf; font-weight: 600;">Зарегистрироваться</a>
   </p>
 </div>
 
@@ -36,3 +38,4 @@
   });
 </script>
 {% endblock %}
+

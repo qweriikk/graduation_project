@@ -20,7 +20,6 @@ body {
 
 .navbar-brand {
   align-items: center;
-  width: 500px;
 }
 
 .marginleft {
@@ -41,9 +40,9 @@ body {
 
 .card {
   margin-top: 30px;
-  border: 2px solid #8d7caf;  /* фиолетовая граница */
-  background-color: white;  /* белый фон */
-  border-radius: 10px;      /* скругленные углы */
+  border: 2px solid #8d7caf; 
+  background-color: white;  
+  border-radius: 10px;     
   overflow: hidden;
 }
 
@@ -60,7 +59,7 @@ body {
 
 .card-title {
   font-size: 1.25rem;
-  color: #8d7caf;  /* фиолетовый цвет текста */
+  color: #8d7caf;  
   text-decoration: none;
   font-weight: 500;
 }
@@ -280,10 +279,29 @@ overflow-y: scroll;
 }
 
 .btn-purple {
-  background-color: #8d7caf;
-  color: #fff;
-  border: none;
+  background-color: #8d7caf !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 10px;
+  font-size: 16px;      
+  padding: 8px 20px;    
+  transition: background-color 0.3s ease;
+  width: auto;         
+  min-width: 120px;    
 }
+
 .btn-purple:hover {
-  background-color: #705c9c;
+  background-color: #705c9c !important;
+  color: white !important;
+}
+
+.login_button, .registr_button {
+  color: #6a1b9a; 
+  text-decoration: none; 
+  font-weight: bold; 
+}
+
+.login_button:hover, .registr_button:hover {
+  color: #4a148c; 
+  text-decoration: underline; 
 }

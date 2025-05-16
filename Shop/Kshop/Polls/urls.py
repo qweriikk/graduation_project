@@ -1,11 +1,13 @@
 from django.urls import path
 from . import views
-from .views import ProductDetailView, ProductListView, RegisterView, LoginView, CartDetailView, ProductListViewNew
+from .views import ProductDetailView, RegisterView, LoginView, CartDetailView, ProductListViewNew
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     # Путь для главной страницы
     path('', ProductListViewNew.as_view(), name="main"),
+    
+    path('search/', views.search_results, name='search_results'),
     
     # Путь для регистрации и входа
     path('register/', RegisterView.as_view(), name="register"),
@@ -16,7 +18,7 @@ urlpatterns = [
     path('product/<int:pk>/', ProductDetailView.as_view(), name='post-detail'),
     
     # Корзина
-    path('cart/', views.cart_detail, name='cart_detail'),
+    path('cart/', CartDetailView.as_view(), name='cart_detail'),
     path('product/<int:pk>/add', views.add_to_cart, name='add_to_cart'),
     path('<int:product_id>/', views.remove_from_cart, name='remove_from_cart'),
     path('cart/clear/', views.clear_cart, name='clear_cart'),

@@ -1,0 +1,113 @@
+{% load static %}
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <title>Результаты поиска</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'Polls/styles.css' %}">
+    <style>
+      .no-results-message {
+        border: 1px solid #8d7caf;  
+        padding: 10px 20px;  
+        border-radius: 10px;
+        background-color: #f9f9f9;
+        color: #8d7caf;
+        font-size: 1.25rem;
+        text-align: center;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);  
+        max-width: 600px;
+        margin: 10px auto 0;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-light bg-light py-4" style="width: 100%;">
+      <div class="container">
+        <a class="navbar-brand" href="{% url 'main' %}">
+          <img class="img-fluid me-1" src="{% static 'img/logo3.png' %}" width="120px" height="100px">
+        </a>
+        <div class="container-fluid">
+          <form class="d-flex" method="get" action="{% url 'search_results' %}">
+            <input class="form-control me-2" type="search" name="q" placeholder="Поиск" aria-label="Поиск">
+            <button class="btn" type="submit">
+              <img style="width: 30px; height: 30px;" src="{% static 'img/search.png' %}" />
+            </button>
+          </form>
+        </div>
+      </div>
+      <div class="header_knob">
+        <div class="container">
+          <a class="navbar-brand" href="#exampleModalToggle" data-bs-toggle="modal">
+            <img class="img-fluid me-4" src="{% static 'img/avatar.png' %}" width="40px" height="40px">
+          </a>
+          <a class="navbar-brand" href="{% url 'favorites' %}">
+            <img class="img-fluid me-4" src="{% static 'img/like.png' %}" width="40px" height="40px">
+          </a>
+          <a class="navbar-brand" href="#exampleModalToggle3" data-bs-toggle="modal">
+            <img class="img-fluid me-4" src="{% static 'img/basket.png' %}" width="50px" height="50px">
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="row">
+      <!-- Sidebar -->
+      <div class="container col-3 marginleft mt-3">
+        <div class="list-group col">
+          <a class="dropdown-item" href="{% url 'stocks' %}">Акции</a>
+          <a class="dropdown-item" href="{% url 'main' %}">Новинки</a>
+          <a class="list-group-item dropdown-toggle" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" href="#">Альбомы</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{% url 'seventeen' %}">Seventeen</a></li>
+            <li><a class="dropdown-item" href="{% url 'category_view' 'enhypen' %}">Enhypen</a></li>
+            <li><a class="dropdown-item" href="{% url 'straykids' %}">Stray Kids</a></li>
+          </ul>
+          <a class="dropdown-item" href="{% url 'merch' %}">Мерч</a>
+        </div>
+      </div>
+
+      <!-- Content -->
+      <div class="row col-9">
+        <div class="content">
+          <div class="row">
+            <label class="fs-2 fw-bold text-center qq mb-3">
+              {% if query %}
+                Результаты поиска по запросу: "{{ query }}"
+              {% else %}
+                Поисковый запрос не задан
+              {% endif %}
+            </label>
+          </div>
+
+          {% if not products %}
+            <div class="no-results-message mt-2">
+              Ничего не найдено по вашему запросу.
+            </div>
+          {% endif %}
+
+          {% if products %}
+            <div class="row row-cols-3 g-4">
+              {% for product in products %}
+                <div class="col">
+                  <div class="card h-100" style="width: 16rem;">
+                    <a href="{% url 'post-detail' product.id %}" class="text-decoration-none">
+                      <img src="{{ product.photo.url }}" class="card-img-top" alt="{{ product.title }}" style="height: 180px; object-fit: contain;">
+                      <div class="card-body text-center p-3">
+                        <h5 class="card-title text-purple mb-2" style="font-size: 1.1rem;">{{ product.title }}</h5>
+                        <p class="fw-bold text-purple mb-0" style="font-size: 1rem;">{{ product.price }} руб.</p>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
