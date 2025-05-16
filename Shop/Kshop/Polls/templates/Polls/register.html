@@ -32,7 +32,10 @@
 
 <script>
   document.querySelectorAll('form input, form select, form textarea').forEach(el => {
-    el.classList.add('modal_input');
+    // Добавлять modal_input только, если поле внутри формы на странице (а не в шапке)
+    if (!el.closest('nav')) {
+      el.classList.add('modal_input');
+    }
   });
 </script>
 {% endblock %}

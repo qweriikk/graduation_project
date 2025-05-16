@@ -6,62 +6,56 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="{% static 'styles.css' %}">
-    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'Polls/styles.css' %}">
+
     <title>{% block title %}Главная{% endblock %}</title>
   </head>
 
   <body>
     <nav class="navbar navbar-light bg-light py-4" style="width: 100%;">
-      <div class="container d-flex align-items-center justify-content-between">
-        <a class="navbar-brand" href="{% url 'main' %}">
-          <img src="{% static 'img/logo3.png' %}" width="120" height="100" alt="logo" class="img-fluid me-3">
-        </a>
-
-        <form class="d-flex" method="get" action="{% url 'search_results' %}" style="max-width: 400px; flex-grow: 1; margin-right: 20px;">
-          <input class="form-control me-2" type="search" placeholder="Поиск" name="q" aria-label="Поиск" style="min-width: 0;">
-          <button class="btn" type="submit" style="padding: 0 10px;">
-            <img src="{% static 'img/search.png' %}" width="30" height="30" alt="search">
-          </button>
-        </form>
-
-        <div class="d-flex align-items-center">
-          {% if user.is_authenticated %}
-          <a class="navbar-brand me-3" href="#logoutModal" data-bs-toggle="modal">
-          {% else %}
-          <a class="navbar-brand me-3" href="#exampleModalToggle" data-bs-toggle="modal">
-          {% endif %}
-            <img src="{% static 'img/avatar.png' %}" width="40" height="40" alt="avatar" class="img-fluid">
-          </a>
-          <a class="navbar-brand me-3" href="{% url 'favorites' %}">
-            <img src="{% static 'img/like.png' %}" width="40" height="40" alt="favorites" class="img-fluid">
-          </a>
-          <a class="navbar-brand" href="#cartModal" data-bs-toggle="modal">
-            <img src="{% static 'img/basket.png' %}" width="50" height="50" alt="basket" class="img-fluid">
-          </a>
+        <div class="container">
+            <a class="navbar-brand" href="{% url "main" %}">
+                <img class="img-fluid me-1" src="{%static 'img/logo3.png'%}" width="120px" height="100px">
+            </a>
+            <div class="container-fluid">
+              <form class="d-flex" action="{% url 'search_results' %}" method="get">
+                <input class="form-control me-2" type="search" name="q" placeholder="Поиск" aria-label="Поиск">
+                <button class="btn" type="submit">
+                  <img style="width: 30px; height: 30px;" src="{% static 'img/search.png' %}" />
+                </button>
+              </form>
+            </div>  
         </div>
-      </div>
-    </nav>
-
-
-    <!-- Контентная часть -->
+        <div class="header_knob">
+          <div class="container">
+            {% if user.is_authenticated %}
+              <a class="navbar-brand" href="#logoutModal" data-bs-toggle="modal">
+            {% else %}
+              <a class="navbar-brand" href="#exampleModalToggle" data-bs-toggle="modal">
+            {% endif %}
+                <img class="img-fluid me-4" src="{% static 'img/avatar.png' %}" width="40px" height="40px">
+              </a>
+            <a class="navbar-brand" href="{% url 'favorites' %}">
+              <img class="img-fluid me-4" src="{% static 'img/like.png' %}" width="40px" height="40px">
+            </a>
+            <a class="navbar-brand" href="#cartModal" data-bs-toggle="modal">
+              <img class="img-fluid me-4" src="{% static 'img/basket.png' %}" width="50px" height="50px">
+            </a>
+          </div>
+    </nav> 
     <div class="row">
-      <!-- Боковое меню -->
       <div class="container col-3 marginleft mt-3">
         <div class="list-group col">
-          <a class="dropdown-item" href="stocks.html">Акции</a>
-          <a class="dropdown-item" href="new.html">Новинки</a>
+          <a class="dropdown-item" href="{% url 'stocks' %}">Акции</a>
+          <a class="dropdown-item" href="{% url 'main' %}">Новинки</a>
           <a class="list-group-item dropdown-toggle" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" href="#">Альбомы</a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="seventeen.html">Seventeen</a></li>
-            <li><a class="dropdown-item" href="enhypen.html">Enhypen</a></li>
-            <li><a class="dropdown-item" href="straykids.html">Stray Kids</a></li>
+            <li><a class="dropdown-item" href="{% url 'category_view' 'seventeen' %}">Seventeen</a></li>
+            <li><a class="dropdown-item" href="{% url 'category_view' 'enhypen' %}">Enhypen</a></li>
+            <li><a class="dropdown-item" href="{% url 'category_view' 'straykids' %}">Stray Kids</a></li>
           </ul>
-          <a class="dropdown-item" href="merch.html">Мерч</a>
+          <a class="dropdown-item" href="{% url 'category_view' 'merch' %}">Мерч</a>
         </div>   
       </div>
 
@@ -76,6 +70,6 @@
     </div>
 
     <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
   </body>
 </html>
