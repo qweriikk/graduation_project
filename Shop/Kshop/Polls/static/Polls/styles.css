@@ -305,3 +305,22 @@ overflow-y: scroll;
   color: #4a148c; 
   text-decoration: underline; 
 }
+
+.description-box {
+  border: 1px solid #ffffff;
+  padding: 10px 15px;
+  border-radius: 10px;
+  background-color: #fefefe;
+  color: #8d7caf;
+  font-size: 1.1rem;  
+  font-weight: bold;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  margin: 10px auto 0; 
+  max-width: 90%; 
+}
+
+.row-cols-3 > .col {
+  padding-left: 2px;   
+  padding-right: 2px;
+  margin-bottom: 6px;  
+}
