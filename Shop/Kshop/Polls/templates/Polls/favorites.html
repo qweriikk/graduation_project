@@ -60,23 +60,24 @@
               <div class="row">
                 <label class="fs-2 fw-bold text-center qq">Избранные товары</label>
               </div>
-              <div class="row row-cols-3 g-4">
+              <div class="row row-cols-3 g-0">
                 {% if favorites %}
                   {% for fav in favorites %}
                     <div class="col">
                       <div class="card h-100">
                         <a href="{% url 'post-detail' fav.product.id %}" class="text-decoration-none">
-                          <img src="{{ fav.product.photo.url }}" class="card-img-top" alt="{{ fav.product.title }}">
-                          <div class="card-body text-center">
-                            <h5 class="card-title text-purple">{{ fav.product.title }}</h5>
-                            <p class="fw-bold text-purple">{{ fav.product.price }} руб.</p>
-                          </div>
+                          <img src="{{ fav.product.photo.url }}" class="card-img-top" alt="{{ fav.product.title }}" style="height: 220px; object-fit: contain;">
                         </a>
-                        <div class="card-footer text-center bg-white border-0">
-                          <form method="post" action="{% url 'remove_favorite' fav.product.id %}">
-                            {% csrf_token %}
-                            <button type="submit" class="btn btn-purple btn-sm">Удалить</button>
-                          </form>
+                        <div class="card-body d-flex flex-column p-3">
+                          <h5 class="card-title text-purple mb-2 text-center" style="font-size: 1.1rem;">{{ fav.product.title }}</h5>
+                          <p class="fw-bold mb-2 text-center mm" style="font-size: 1rem;">{{ fav.product.price }} руб.</p>
+
+                          <div class="mt-auto text-center">
+                            <form method="post" action="{% url 'remove_favorite' fav.product.id %}">
+                              {% csrf_token %}
+                              <button type="submit" class="btn btn-purple btn-sm">Удалить</button>
+                            </form>
+                          </div>
                         </div>
                       </div>
                     </div>

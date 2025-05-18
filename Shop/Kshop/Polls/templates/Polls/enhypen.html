@@ -1,6 +1,6 @@
 {% load static %}
 <!doctype html>
-<html lang="en">
+<html lang="ru">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -60,12 +60,12 @@
           <div class="row row-cols-3 g-0">
             {% for product in products %}
               <div class="col">
-                <div class="card h-100" style="width: 23rem;">
+                <div class="card h-100">
                   <a href="{% url 'post-detail' product.id %}" class="text-decoration-none">
-                    <img src="{{ product.photo.url }}" class="card-img-top" alt="{{ product.title }}" style="height: 200px; object-fit: contain;">
+                    <img src="{{ product.photo.url }}" class="card-img-top" alt="{{ product.title }}" style="height: 220px; object-fit: contain;">
                     <div class="card-body text-center p-3">
                       <h5 class="card-title text-purple mb-2" style="font-size: 1.1rem;">{{ product.title }}</h5>
-                      <p class="fw-bold text-purple mb-0" style="font-size: 1rem;">{{ product.price }} руб.</p>
+                      <p class="fw-bold mm mb-0" style="font-size: 1rem;">{{ product.price }} руб.</p>
                     </div>
                   </a>
                 </div>

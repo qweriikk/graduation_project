@@ -1,82 +1,82 @@
 body {
-  overflow-x: hidden;
+overflow-x: hidden;
+font-family: 'Verdana', sans-serif;
 }
 
 .list-group {
-  width: 460px;
-  position: sticky;
-  top: 30px;
+width: 460px;
+position: sticky;
+top: 30px;
 }
 
 .container-fluid {
-  align-items: center;
-  width: 500px;
+align-items: center;
+width: 500px;
 }
 
 .header_knob {
-  align-items: center;
-  width: 500px;
+align-items: center;
+width: 500px;
 }
 
 .navbar-brand {
-  align-items: center;
+align-items: center;
 }
 
 .marginleft {
-  margin-left : 20px;
+margin-left: 20px;
+background-color: white; 
+min-height: 100vh; 
+padding-top: 20px; 
 }
 
 .qq {
-  color: #8d7caf;
+color: #8d7caf;
 }
 
 .cards-wrapper {
-  display: flex;
+display: flex;
 }
 
 .img_group {
-  margin: 15px;
+margin: 15px;
 }
 
 .card {
-  margin-top: 30px;
-  border: 2px solid #8d7caf; 
-  background-color: white;  
-  border-radius: 10px;     
-  overflow: hidden;
+width: 23rem;
+margin-top: 30px;
+border: 2px solid #8d7caf;
+background-color: white;
+border-radius: 10px;
+overflow: hidden;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); 
 }
 
 .card img {
-  width: 100%;
-  height: 250px;
-  object-fit: cover;
+width: 100%;
+height: 250px;
+object-fit: cover;
 }
 
 .card-body {
-  padding: 15px;
-  text-align: center;
+padding: 15px;
+text-align: center;
 }
 
 .card-title {
-  font-size: 1.25rem;
-  color: #8d7caf;  
-  text-decoration: none;
-  font-weight: 500;
+font-size: 1.25rem;
+color: #8d7caf;  
+text-decoration: none;
+font-weight: 500;
 }
 
 .card-title:hover {
-  text-decoration: underline;
-}
-
-.card-price {
-  font-size: 1.25rem;
-  color: #8d7caf;
-  margin-top: 10px;
+text-decoration: underline;
 }
 
 .card:hover {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+cursor: pointer;
 }
 
 * модальное окно авторизации/регистрации */
@@ -86,26 +86,32 @@ padding-right: 10px;
 display: flex;
 justify-content: right;
 }
+
 .modal_header{
 padding-top: 30px;
 /* background-color: aqua; */
 display: flex;
 justify-content: center;
 }
+
 .titte_window{
 font-size: 40px;
 color: #041F27;
 font-weight: 400;
 }
+
 .email_div{
 margin-top: 50px;
 }
+
 .password_div{
 margin-top: 30px;
 }
+
 .password_div_2{
 margin-top: 30px;
 }
+
 input.modal_input{
 font-size: 24px;
 padding-left: 24px;
@@ -114,13 +120,16 @@ border: #D9D9D9 3px solid;
 width: 300px;
 height: 60px;
 }
+
 input.modal_input:focus{
 outline: #D9D9D9;
 /* border: #D9D9D9 3px solid; */
 }
+
 .modal_login_div{
 margin-top: 50px;
 }
+
 .log_in_modal{
 color: #fff;
 font-size: 28px;
@@ -130,31 +139,37 @@ border: none;
 background-color: #8d7caf !important;
 border-radius: 10px;
 }
+
 /* модалка авторизованного пользователя */
 .modal_header_auth{
 margin-top: 20px !important;
 padding-left: 50px;
 padding-right: 50px;
 }
+
 .email_label{
 font-size: 28px;
 font-weight: 400;
 color: #8d7caf;
 }
+
 .email{
 font-size: 26px;
 font-weight: 400;
 color: #8d7caf;
 }
+
 .linked_cards{
 font-size: 24px;
 padding-left: 35px;
 margin-top: 30px !important;
 }
+
 .card_card{
 padding-left: 30px;
 margin-top: 30px !important;
 }
+
 .card_bank{
 border-radius: 5px;
 color: #fff !important;
@@ -164,23 +179,27 @@ width: 120px;
 background-color: #8d7caf !important;
 border: none !important;
 }
+
 .number{
 display: flex;
 justify-content: right;
 padding-right: 10px;
 padding-top: 5px;
 }
+
 .date_active{
 display: flex;
 justify-content: left;
 padding-left: 10px;
 padding-top: 5px;
 }
+
 .btn_unite{
 display: flex;
 justify-content: left;
 align-items: center;
 }
+
 .untie_it{
 color: #fff !important;
 height: 45px;
@@ -190,10 +209,12 @@ border: none;
 background-color: #8d7caf;
 font-size: 20px;
 }
+
 .modal_logout_div{
 margin-top: 50px;
 padding-bottom: 10px;
 }
+
 .log_out_modal{
 color: #fff;
 font-size: 28px;
@@ -209,18 +230,22 @@ width: 97%;
 /* height: 400px; */
 /* background-color: aquamarine; */
 }
+
 .card{
 margin-top: 30px;
 border: none !important;
 }
+
 .image_card{
 height: 350px;
 width: 350px;
 }
+
 .title_product{
 font-size: 32px;
 font-weight: 500;
 }
+
 .price_product{
 margin-top: 10px;
 font-size: 30px;
@@ -230,6 +255,7 @@ font-weight: 400;
 .btn_buy_btn_favo{
 margin-top: 20px;
 }
+
 .button_buy{
 display: flex;
 justify-content: center;
@@ -242,17 +268,20 @@ height: 50px;
 width: 220px;
 font-size: 20px;
 }
+
 .basket_img{
 padding-right: 10px;
 height: 35px;
 width: 35px;
 /* margin-top: -6px; */
 }
+
 .favorites{
 display: flex;
 /* justify-content: center; */
 align-items: center;
 }
+
 .favo_button{
 height: 50px;
 width: 50px;
@@ -260,10 +289,12 @@ border: #fff 1px solid;
 border-radius: 10px;
 background-color: #fff;
 }
+
 .favo_img{
 height: 30px;
 width: 35px;
 }
+
 .description_product{
 margin-top: 10px;
 font-size: 18px;
@@ -275,52 +306,82 @@ overflow-y: scroll;
 }
 
 .text-purple {
-  color: #8d7caf !important;
+color: #8d7caf !important;
+}
+
+.mm {
+color: #464444 !important;
 }
 
 .btn-purple {
-  background-color: #8d7caf !important;
-  color: white !important;
-  border: none !important;
-  border-radius: 10px;
-  font-size: 16px;      
-  padding: 8px 20px;    
-  transition: background-color 0.3s ease;
-  width: auto;         
-  min-width: 120px;    
+background-color: #8d7caf;
+color: white;
+border: none;
+border-radius: 10px;
+font-size: 16px;
+padding: 8px 20px;
+transition: background-color 0.3s ease;
+width: auto;
+min-width: 120px;
 }
 
 .btn-purple:hover {
-  background-color: #705c9c !important;
-  color: white !important;
+background-color: #705c9c;
+color: white;
+}
+
+.btn-purple:active {
+background-color: #5f4a8a;
+}
+
+.btn-purple.btn-sm {
+padding: 0.25rem 0.5rem;
+font-size: 0.85rem;
 }
 
 .login_button, .registr_button {
-  color: #6a1b9a; 
-  text-decoration: none; 
-  font-weight: bold; 
+color: #6a1b9a; 
+text-decoration: none; 
+font-weight: bold; 
 }
 
 .login_button:hover, .registr_button:hover {
-  color: #4a148c; 
-  text-decoration: underline; 
+color: #4a148c; 
+text-decoration: underline; 
 }
 
 .description-box {
-  border: 1px solid #ffffff;
-  padding: 10px 15px;
-  border-radius: 10px;
-  background-color: #fefefe;
-  color: #8d7caf;
-  font-size: 1.1rem;  
-  font-weight: bold;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-  margin: 10px auto 0; 
-  max-width: 90%; 
+border: 1px solid #ffffff;
+padding: 10px 15px;
+border-radius: 10px;
+background-color: #fefefe;
+color: #464444;
+font-size: 1.1rem;  
+box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+margin: 10px auto 0; 
+max-width: 90%; 
 }
 
 .row-cols-3 > .col {
-  padding-left: 2px;   
-  padding-right: 2px;
-  margin-bottom: 6px;  
+padding-left: 2px;   
+padding-right: 2px;
+margin-bottom: 6px;  
+}
+
+.list-group a {
+font-size: 1.2rem;
+padding: 12px 16px;
+color: #4a235a;
+font-weight: 500;
+transition: background-color 0.3s ease;
+}
+
+.list-group {
+background-color: white; 
+border-radius: 10px;
+}
+
+.list-group a:hover {
+background-color: #8d7caf; 
+color: white;
 }
