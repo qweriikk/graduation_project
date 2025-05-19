@@ -1,3 +1,4 @@
+{% extends "Polls/base.html" %}
 {% load static %}
 <!doctype html>
 <html lang="ru">
@@ -24,15 +25,35 @@
       </div>
       <div class="header_knob">
         <div class="container">
-          <a class="navbar-brand" href="#exampleModalToggle" data-bs-toggle="modal">
-            <img class="img-fluid me-4" src="{% static 'img/avatar.png' %}" width="40px" height="40px">
-          </a>
-          <a class="navbar-brand" href="{% url 'favorites' %}">
-            <img class="img-fluid me-4" src="{% static 'img/like.png' %}" width="40px" height="40px">
-          </a>
-          <a class="navbar-brand" href="#exampleModalToggle3" data-bs-toggle="modal">
-            <img class="img-fluid me-4" src="{% static 'img/basket.png' %}" width="50px" height="50px">
-          </a>
+          {% if user.is_authenticated %}
+            <a class="navbar-brand" href="#logoutModal" data-bs-toggle="modal">
+          {% else %}
+            <a class="navbar-brand" href="#exampleModalToggle" data-bs-toggle="modal">
+          {% endif %}
+              <img class="img-fluid me-4" src="{% static 'img/avatar.png' %}" width="40px" height="40px">
+            </a>
+
+          {% if user.is_authenticated %}
+            <a class="navbar-brand" href="{% url 'favorites' %}">
+              <img class="img-fluid me-4" src="{% static 'img/like.png' %}" width="40px" height="40px">
+            </a>
+          {% else %}
+            <span class="navbar-brand" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                  title="Войдите, чтобы просматривать избранное" style="cursor: default;">
+              <img class="img-fluid me-4" src="{% static 'img/like.png' %}" width="40px" height="40px">
+            </span>
+          {% endif %}
+
+          {% if user.is_authenticated %}
+            <a class="navbar-brand" href="#cartModal" data-bs-toggle="modal">
+              <img class="img-fluid me-4" src="{% static 'img/basket.png' %}" width="50px" height="50px">
+            </a>
+          {% else %}
+            <span class="navbar-brand" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                  title="Войдите, чтобы просматривать корзину" style="cursor: default;">
+              <img class="img-fluid me-4" src="{% static 'img/basket.png' %}" width="50px" height="50px">
+            </span>
+          {% endif %}
         </div>
       </div>
     </nav>
@@ -47,6 +68,15 @@
             <li><a class="dropdown-item" href="{% url 'seventeen' %}">Seventeen</a></li>
             <li><a class="dropdown-item" href="{% url 'category_view' 'enhypen' %}">Enhypen</a></li>
             <li><a class="dropdown-item" href="{% url 'straykids' %}">Stray Kids</a></li>
+            <li><a class="dropdown-item" href="{% url 'category_view' 'bts' %}">BTS</a></li>
+            <li><a class="dropdown-item" href="{% url 'category_view' 'txt' %}">TXT</a></li>
+            <li><a class="dropdown-item" href="{% url 'category_view' 'ateez' %}">Ateez</a></li>
+            <li><a class="dropdown-item" href="{% url 'category_view' 'twice' %}">Twice</a></li>
+            <li><a class="dropdown-item" href="{% url 'category_view' 'aespa' %}">Aespa</a></li>
+            <li><a class="dropdown-item" href="{% url 'category_view' 'idle' %}">I-DLE</a></li>
+            <li><a class="dropdown-item" href="{% url 'category_view' 'itzy' %}">Itzy</a></li>
+            <li><a class="dropdown-item" href="{% url 'category_view' 'blackpink' %}">Blackpink</a></li>
+            <li><a class="dropdown-item" href="{% url 'category_view' 'lesserafim' %}">Le Sserafim</a></li>
           </ul>
           <a class="dropdown-item" href="{% url 'merch' %}">Мерч</a>
         </div>
@@ -54,6 +84,7 @@
 
       <div class="row col-9">
         <div class="content">
+        {% block content %}
           <div class="row">
             <label class="fs-2 fw-bold text-center qq">Enhypen</label>
           </div>
@@ -72,6 +103,7 @@
               </div>
             {% endfor %}
           </div>
+        {% endblock %}  
         </div>
       </div>
     </div>

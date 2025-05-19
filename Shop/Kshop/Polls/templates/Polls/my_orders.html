@@ -1,111 +1,76 @@
+{% extends "Polls/base.html" %}
 {% load static %}
-<!doctype html>
-<html lang="ru">
-  <head>
-    <meta charset="utf-8">
-    <title>Мои заказы</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'Polls/styles.css' %}">
 
-    <style>
-      .header-icon {
-        width: 40px;
-        height: 40px;
-      }
-      .header-icon.cart-icon {
-        width: 50px;
-        height: 50px;
-      }
-      .btn-purple {
-        background-color: #8d7caf;
-        color: #fff;
-        border: none;
-      }
-      .btn-purple:hover {
-        background-color: #705c9c;
-      }
-      .order-box {
-        border: 1px solid #ddd;
-        border-left: 5px solid #8d7caf;
-        margin-bottom: 1.5rem;
-        padding: 1rem;
-        border-radius: .5rem;
-        background: #f9f9f9;
-      }
-      .order-title {
-        color: #8d7caf;
-      }
-      .product-thumb {
-        width: 50px;
-        height: 50px;
-        object-fit: cover;
-        border-radius: 4px;
-        margin-right: 10px;
-      }
-      .item-info {
-        display: flex;
-        align-items: center;
-      }
-      .order-status {
-        font-weight: bold;
-        color: #8d7caf;
-      }
-    </style>
-  </head>
-  <body>
-    
-    <nav class="navbar navbar-light bg-light py-4" style="width: 100%;">
-        <div class="container">
-            <a class="navbar-brand" href="{% url "main" %}">
-                <img class="img-fluid me-1" src="{%static 'img/logo3.png'%}" width="120px" height="100px">
-            </a>
-            <div class="container-fluid">
-              <form class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="Поиск" aria-label="Поиск">
-                <button class="btn" type="submit"><img style="width: 30px; height: 30px;" src="{%static 'img/search.png'%}"/></button>
-              </form>
-            </div>
-        </div>
-        <div class="header_knob">
-          <div class="container">
-              <a class="navbar-brand" href="#exampleModalToggle" data-bs-toggle="modal">
-                  <img class="img-fluid me-4" src="{%static 'img/avatar.png'%}" width="40px" height="40px">
-              </a>
-              <a class="navbar-brand" href="{% url "favorites" %}">
-                  <img class="img-fluid me-4" src="{%static 'img/like.png'%}" width="40px" height="40px">
-              </a>
-              <a class="navbar-brand" href="#exampleModalToggle3" data-bs-toggle="modal">
-                  <img class="img-fluid me-4" src="{%static 'img/basket.png'%}" width="50px" height="50px">
-              </a>
-          </div>   
-    </nav> 
+{% block title %}Мои заказы{% endblock %}
 
-    <!-- Основной контент -->
-    <div class="container py-5">
-      <h2 class="mb-4 order-title">Мои заказы</h2>
+{% block extra_css %}
+<style>
+  .header-icon {
+    width: 40px;
+    height: 40px;
+  }
+  .header-icon.cart-icon {
+    width: 50px;
+    height: 50px;
+  }
+  .btn-purple {
+    background-color: #8d7caf;
+    color: #fff;
+    border: none;
+  }
+  .btn-purple:hover {
+    background-color: #705c9c;
+  }
+  .order-box {
+    border: 1px solid #ddd;
+    border-left: 5px solid #8d7caf;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    border-radius: .5rem;
+    background: #f9f9f9;
+  }
+  .order-title {
+    color: #8d7caf;
+  }
+  .product-thumb {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-right: 10px;
+  }
+  .item-info {
+    display: flex;
+    align-items: center;
+  }
+  .order-status {
+    font-weight: bold;
+    color: #8d7caf;
+  }
+</style>
+{% endblock %}
 
-      {% if orders %}
-        {% for order in orders %}
-          <div class="order-box">
-            <h5>Заказ №{{ order.id }} — {{ order.created_at|date:"d.m.Y H:i" }}</h5>
-            <p>Статус: <span class="order-status">{{ order.get_status_display }}</span></p>
-            <ul class="list-unstyled">
-              {% for item in order.items.all %}
-                <li class="item-info mb-2">
-                  {% if item.product.photo %}
-                    <img src="{{ item.product.photo.url }}" alt="{{ item.product.title }}" class="product-thumb">
-                  {% endif %}
-                  {{ item.product.title }} (x{{ item.quantity }}) — {{ item.price|floatformat:0 }} ₽
-                </li>
-              {% endfor %}
-            </ul>
-          </div>
-        {% endfor %}
-      {% else %}
-        <p>У вас пока нет заказов.</p>
-      {% endif %}
-    </div>
+{% block content %}
+  <h2 class="mb-4 order-title">Мои заказы</h2>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-  </body>
-</html>
+  {% if orders %}
+    {% for order in orders %}
+      <div class="order-box">
+        <h5>Заказ №{{ order.id }} — {{ order.created_at|date:"d.m.Y H:i" }}</h5>
+        <p>Статус: <span class="order-status">{{ order.get_status_display }}</span></p>
+        <ul class="list-unstyled">
+          {% for item in order.items.all %}
+            <li class="item-info mb-2">
+              {% if item.product.photo %}
+                <img src="{{ item.product.photo.url }}" alt="{{ item.product.title }}" class="product-thumb">
+              {% endif %}
+              {{ item.product.title }} (x{{ item.quantity }}) — {{ item.price|floatformat:0 }} ₽
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p>У вас пока нет заказов.</p>
+  {% endif %}
+{% endblock %}

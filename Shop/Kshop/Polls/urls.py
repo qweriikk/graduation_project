@@ -44,6 +44,15 @@ urlpatterns = [
     path('straykids/', views.straykids_view, name='straykids'),
     path('seventeen/', views.seventeen_view, name='seventeen'),
     path('enhypen/', views.enhypen_view, name='enhypen'),
+    path('twice/', views.twice_view, name='twice'),
+    path('aespa/', views.aespa_view, name='aespa'),
+    path('idle/', views.idle_view, name='idle'),
+    path('itzy/', views.itzy_view, name='itzy'),
+    path('bts/', views.bts_view, name='bts'),
+    path('txt/', views.txt_view, name='txt'),
+    path('ateez/', views.ateez_view, name='ateez'),
+    path('blackpink/', views.blackpink_view, name='blackpink'),
+    path('lesserafim/', views.lesserafim_view, name='lesserafim'),
     
     # Динамичные категории
     path('category/<str:category_name>/', views.category_view, name='category_view'),

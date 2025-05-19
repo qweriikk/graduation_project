@@ -34,12 +34,28 @@
             {% endif %}
                 <img class="img-fluid me-4" src="{% static 'img/avatar.png' %}" width="40px" height="40px">
               </a>
-            <a class="navbar-brand" href="{% url 'favorites' %}">
-              <img class="img-fluid me-4" src="{% static 'img/like.png' %}" width="40px" height="40px">
-            </a>
-            <a class="navbar-brand" href="#cartModal" data-bs-toggle="modal">
-              <img class="img-fluid me-4" src="{% static 'img/basket.png' %}" width="50px" height="50px">
-            </a>
+
+            {% if user.is_authenticated %}
+              <a class="navbar-brand" href="{% url 'favorites' %}">
+                <img class="img-fluid me-4" src="{% static 'img/like.png' %}" width="40px" height="40px">
+              </a>
+            {% else %}
+              <span class="navbar-brand" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                    title="Войдите, чтобы просматривать избранное" style="cursor: default;">
+                <img class="img-fluid me-4" src="{% static 'img/like.png' %}" width="40px" height="40px">
+              </span>
+            {% endif %}
+
+            {% if user.is_authenticated %}
+              <a class="navbar-brand" href="#cartModal" data-bs-toggle="modal">
+                <img class="img-fluid me-4" src="{% static 'img/basket.png' %}" width="50px" height="50px">
+              </a>
+            {% else %}
+              <span class="navbar-brand" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                    title="Войдите, чтобы просматривать корзину" style="cursor: default;">
+                <img class="img-fluid me-4" src="{% static 'img/basket.png' %}" width="50px" height="50px">
+              </span>
+            {% endif %}
           </div>
     </nav> 
     <div class="row">
@@ -52,6 +68,15 @@
             <li><a class="dropdown-item" href="{% url 'category_view' 'seventeen' %}">Seventeen</a></li>
             <li><a class="dropdown-item" href="{% url 'category_view' 'enhypen' %}">Enhypen</a></li>
             <li><a class="dropdown-item" href="{% url 'category_view' 'straykids' %}">Stray Kids</a></li>
+            <li><a class="dropdown-item" href="{% url 'category_view' 'bts' %}">BTS</a></li>
+            <li><a class="dropdown-item" href="{% url 'category_view' 'txt' %}">TXT</a></li>
+            <li><a class="dropdown-item" href="{% url 'category_view' 'ateez' %}">Ateez</a></li>
+            <li><a class="dropdown-item" href="{% url 'category_view' 'twice' %}">Twice</a></li>
+            <li><a class="dropdown-item" href="{% url 'category_view' 'aespa' %}">Aespa</a></li>
+            <li><a class="dropdown-item" href="{% url 'category_view' 'idle' %}">I-DLE</a></li>
+            <li><a class="dropdown-item" href="{% url 'category_view' 'itzy' %}">Itzy</a></li>
+            <li><a class="dropdown-item" href="{% url 'category_view' 'blackpink' %}">Blackpink</a></li>
+            <li><a class="dropdown-item" href="{% url 'category_view' 'lesserafim' %}">Le Sserafim</a></li>
           </ul>
           <a class="dropdown-item" href="{% url 'category_view' 'merch' %}">Мерч</a>
         </div>   

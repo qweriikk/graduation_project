@@ -69,9 +69,12 @@
                           <img src="{{ fav.product.photo.url }}" class="card-img-top" alt="{{ fav.product.title }}" style="height: 220px; object-fit: contain;">
                         </a>
                         <div class="card-body d-flex flex-column p-3">
-                          <h5 class="card-title text-purple mb-2 text-center" style="font-size: 1.1rem;">{{ fav.product.title }}</h5>
+                          <h5 class="card-title text-purple mb-2 text-center" style="font-size: 1.1rem;">
+                            <a href="{% url 'post-detail' fav.product.id %}" class="text-decoration-none text-purple">
+                              {{ fav.product.title }}
+                            </a>
+                          </h5>
                           <p class="fw-bold mb-2 text-center mm" style="font-size: 1rem;">{{ fav.product.price }} руб.</p>
-
                           <div class="mt-auto text-center">
                             <form method="post" action="{% url 'remove_favorite' fav.product.id %}">
                               {% csrf_token %}

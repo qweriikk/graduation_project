@@ -243,3 +243,48 @@ def seventeen_view(request):
     category = get_object_or_404(Category, name__iexact='seventeen')
     products = Product.objects.filter(category=category)
     return render(request, 'Polls/seventeen.html', {'products': products})
+
+def twice_view(request):
+    category = get_object_or_404(Category, name__iexact='twice')
+    products = Product.objects.filter(category=category)
+    return render(request, 'Polls/twice.html', {'products': products})
+
+def aespa_view(request):
+    category = get_object_or_404(Category, name__iexact='aespa')
+    products = Product.objects.filter(category=category)
+    return render(request, 'Polls/aespa.html', {'products': products})
+
+def idle_view(request):
+    category = get_object_or_404(Category, name__iexact='idle')
+    products = Product.objects.filter(category=category)
+    return render(request, 'Polls/idle.html', {'products': products})
+
+def itzy_view(request):
+    category = get_object_or_404(Category, name__iexact='itzy')
+    products = Product.objects.filter(category=category)
+    return render(request, 'Polls/itzy.html', {'products': products})
+
+def bts_view(request):
+    category = get_object_or_404(Category, name__iexact='bts')
+    products = Product.objects.filter(category=category)
+    return render(request, 'Polls/bts.html', {'products': products})
+
+def txt_view(request):
+    category = get_object_or_404(Category, name__iexact='txt')
+    products = Product.objects.filter(category=category)
+    return render(request, 'Polls/txt.html', {'products': products})
+
+def ateez_view(request):
+    category = get_object_or_404(Category, name__iexact='ateez')
+    products = Product.objects.filter(category=category)
+    return render(request, 'Polls/ateez.html', {'products': products})
+
+def blackpink_view(request):
+    category = get_object_or_404(Category, name__iexact='blackpink')
+    products = Product.objects.filter(category=category)
+    return render(request, 'Polls/blackpink.html', {'products': products})
+
+def lesserafim_view(request):
+    category = get_object_or_404(Category, name__iexact='lesserafim')
+    products = Product.objects.filter(category=category)
+    return render(request, 'Polls/lesserafim.html', {'products': products})
