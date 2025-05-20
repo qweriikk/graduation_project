@@ -385,3 +385,23 @@ border-radius: 10px;
 background-color: #8d7caf; 
 color: white;
 }
+
+.cart-item {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  max-width: 100%;
+}
+
+.cart-item p {
+  margin-bottom: 0.25rem;
+  font-size: 0.95rem;
+  line-height: 1.2;
+}
+
+.cart-item .btn {
+  white-space: nowrap;
+}
+
+.modal-body .d-flex {
+  flex-wrap: wrap;
+}

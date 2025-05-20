@@ -68,7 +68,7 @@
       <div class="container col-3 marginleft mt-3">
         <div class="list-group col">
           <a class="dropdown-item" href="{% url 'stocks' %}">Акции</a>
-          <a class="dropdown-item" href="{% url 'main' %}">Новинки</a>
+          <a class="dropdown-item" href="{% url 'new' %}">Новинки</a>
           <a class="list-group-item dropdown-toggle" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" href="#">Альбомы</a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="{% url 'category_view' 'seventeen' %}">Seventeen</a></li>
@@ -99,9 +99,7 @@
 
     {% include "Polls/modals.html" %}
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
     {% block extra_js %}{% endblock %}     
 

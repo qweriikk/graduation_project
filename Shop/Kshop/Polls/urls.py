@@ -37,10 +37,10 @@ urlpatterns = [
     path('favorites/remove/<int:product_id>/', views.remove_favorite, name='remove_favorite'),
     
     path('stocks/', views.stocks_view, name='stocks'),
+    path('new/', views.new_view, name='new'),
     
     # Статичные страницы категорий 
     path('merch.html', views.merch_view, name='merch'),
-    path('new/', views.new_view, name='new'),
     path('straykids/', views.straykids_view, name='straykids'),
     path('seventeen/', views.seventeen_view, name='seventeen'),
     path('enhypen/', views.enhypen_view, name='enhypen'),

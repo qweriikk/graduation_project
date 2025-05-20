@@ -26,6 +26,9 @@ class ProductListViewNew(ListView):
     template_name = 'Polls/main.html'
     context_object_name = 'products'
     ordering = ['-date_posted']
+    
+    def get_queryset(self):
+        return Product.objects.order_by('-date_posted')[:6]
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -56,51 +59,61 @@ class CartDetailView(LoginRequiredMixin, ListView):
 def add_to_cart(request, pk):
     product = get_object_or_404(Product, pk=pk)
     cart, _ = Cart.objects.get_or_create(user=request.user)
+
     cart_item, created = CartItem.objects.get_or_create(cart=cart, product=product)
-    cart_item.quantity += 1
-    cart_item.save()
-    return redirect('main')
+
+    if not created:
+        cart_item.quantity += 1
+        cart_item.save()
+
+    return redirect(request.META.get('HTTP_REFERER', 'main'))
 
 
 @login_required
 def increase_quantity(request, product_id):
-    cart = get_object_or_404(Cart, user=request.user)
-    product = get_object_or_404(Product, id=product_id)
-    cart_item = CartItem.objects.filter(cart=cart, product=product).first()
-    if cart_item:
-        cart_item.quantity += 1
-        cart_item.save()
-    else:
-        CartItem.objects.create(cart=cart, product=product, quantity=1)
-    return redirect('main')
+    if request.method == 'POST':
+        cart = get_object_or_404(Cart, user=request.user)
+        product = get_object_or_404(Product, id=product_id)
+        cart_item = CartItem.objects.filter(cart=cart, product=product).first()
 
+        if cart_item:
+            cart_item.quantity += 1
+            cart_item.save()
+
+    return redirect(request.META.get('HTTP_REFERER', 'main'))
 
 @login_required
 def decrease_quantity(request, product_id):
-    cart = get_object_or_404(Cart, user=request.user)
-    product = get_object_or_404(Product, id=product_id)
-    cart_item = get_object_or_404(CartItem, cart=cart, product=product)
-    if cart_item.quantity > 1:
-        cart_item.quantity -= 1
-        cart_item.save()
-    else:
-        cart_item.delete()
-    return redirect('main')
+    if request.method == 'POST':
+        cart = get_object_or_404(Cart, user=request.user)
+        product = get_object_or_404(Product, id=product_id)
+        cart_item = CartItem.objects.filter(cart=cart, product=product).first()
 
+        if cart_item:
+            if cart_item.quantity > 1:
+                cart_item.quantity -= 1
+                cart_item.save()
+            else:
+                cart_item.delete()
+
+    return redirect(request.META.get('HTTP_REFERER', 'main'))
 
 @login_required
 def remove_from_cart(request, product_id):
-    cart = get_object_or_404(Cart, user=request.user)
-    product = get_object_or_404(Product, id=product_id)
-    CartItem.objects.filter(cart=cart, product=product).delete()
-    return redirect('main')
+    if request.method == 'POST':
+        cart = get_object_or_404(Cart, user=request.user)
+        product = get_object_or_404(Product, id=product_id)
+        CartItem.objects.filter(cart=cart, product=product).delete()
 
+    return redirect(request.META.get('HTTP_REFERER', 'main'))
 
 @login_required
 def clear_cart(request):
-    cart = get_object_or_404(Cart, user=request.user)
-    cart.items.all().delete()
-    return redirect('main')
+    if request.method == 'POST':
+        cart = get_object_or_404(Cart, user=request.user)
+        cart.items.all().delete()
+
+    return redirect(request.META.get('HTTP_REFERER', 'main'))
 
 
 @login_required
@@ -288,3 +301,7 @@ def lesserafim_view(request):
     category = get_object_or_404(Category, name__iexact='lesserafim')
     products = Product.objects.filter(category=category)
     return render(request, 'Polls/lesserafim.html', {'products': products})
+
+def new_view(request):
+    new_products = Product.objects.all().order_by('-date_posted')[:12]
+    return render(request, 'Polls/new.html', {'products': new_products})
