@@ -115,6 +115,23 @@ def clear_cart(request):
 
     return redirect(request.META.get('HTTP_REFERER', 'main'))
 
+def cart_data(request):
+    if request.user.is_authenticated:
+        try:
+            cart = Cart.objects.get(user=request.user)
+            cart_items = CartItem.objects.filter(cart=cart)
+            cart_total = sum(item.product.price * item.quantity for item in cart_items)
+        except Cart.DoesNotExist:
+            cart_items = []
+            cart_total = 0
+        return {
+            'cart_items': cart_items,
+            'cart_total': cart_total
+        }
+    return {
+        'cart_items': [],
+        'cart_total': 0
+    }
 
 @login_required
 def checkout(request):

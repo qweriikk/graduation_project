@@ -13,7 +13,9 @@
           {% if cart_items %}
             {% for item in cart_items %}
               <div class="cart-item mb-3">
-                <p class="mb-1 text-break" style="max-width: 100%;">{{ item.product.title }}</p>
+                <p class="mb-1 text-break" style="max-width: 100%;">
+                  {{ item.product.title }} — {{ item.product.price|floatformat:0 }}
+                </p>
                 <div class="d-flex flex-wrap gap-2 justify-content-between align-items-center">
                   <div class="d-flex align-items-center gap-2">
                     <form method="post" action="{% url 'decrease_quantity' item.product.id %}">
@@ -33,6 +35,11 @@
                 </div>
               </div>
             {% endfor %}
+            <hr>
+            <div class="d-flex justify-content-between fw-bold">
+              <span>Итого:</span>
+              <span>{{ cart_total|floatformat:0 }}</span>
+            </div>
           {% else %}
             <p>Ваша корзина пуста.</p>
           {% endif %}
