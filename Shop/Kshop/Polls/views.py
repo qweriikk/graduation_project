@@ -198,7 +198,7 @@ def remove_favorite(request, product_id):
 
 def category_view(request, category_name):
     category = get_object_or_404(Category, name__iexact=category_name)
-    products = Product.objects.filter(category=category)
+    products = Product.objects.filter(category=category).order_by('-date_posted')
     return render(request, f'Polls/{category_name.lower()}.html', {
         'products': products,
         'category': category,
