@@ -203,12 +203,21 @@
           {% endif %}
         </div>
         <div class="modal-footer">
-          <form method="post" action="{% url 'clear_cart' %}">{% csrf_token %}
-            <button class="btn btn-purple btn-md" type="submit">Очистить корзину</button>
+          <form method="post" action="{% url 'clear_cart' %}">
+            {% csrf_token %}
+            <button class="btn btn-purple btn-md" type="submit" {% if not cart_items %}disabled{% endif %}>
+              Очистить корзину
+            </button>
           </form>
-          <form method="post" action="{% url 'checkout' %}">{% csrf_token %}
-            <button class="btn btn-purple btn-md" type="submit">Оформить заказ</button>
-          </form>
+
+          {% if cart_items %}
+            <form method="post" action="{% url 'checkout' %}">
+              {% csrf_token %}
+              <button class="btn btn-purple btn-md" type="submit">Оформить заказ</button>
+            </form>
+          {% else %}
+            <button class="btn btn-secondary btn-md" type="button" disabled>Оформить заказ</button>
+          {% endif %}
         </div>
       </div>
     </div>

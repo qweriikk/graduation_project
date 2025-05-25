@@ -1,129 +1,65 @@
+{% extends "Polls/base.html" %}
 {% load static %}
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="{% static 'Polls/styles.css' %}">
-</head>
-<body>
-  <nav class="navbar navbar-light bg-light py-4" style="width: 100%;">
-    <div class="container">
-      <a class="navbar-brand" href="{% url "main" %}">
-        <img class="img-fluid me-1" src="{% static 'img/logo3.png' %}" width="120px" height="100px">
-      </a>
-      <div class="container-fluid">
-        <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Поиск" aria-label="Поиск">
-          <button class="btn" type="submit">
-            <img style="width: 30px; height: 30px;" src="{% static 'img/search.png' %}"/>
-          </button>
-        </form>
-      </div>
-    </div>
-    <div class="header_knob">
-      <div class="container">
-        <a class="navbar-brand" href="#exampleModalToggle" data-bs-toggle="modal">
-          <img class="img-fluid me-4" src="{% static 'img/avatar.png' %}" width="40px" height="40px">
-        </a>
-        <a class="navbar-brand" href="">
-          <img class="img-fluid me-4" src="{% static 'img/like.png' %}" width="40px" height="40px">
-        </a>
-        <a class="navbar-brand" href="#exampleModalToggle2" data-bs-toggle="modal">
-          <img class="img-fluid me-4" src="{% static 'img/basket.png' %}" width="50px" height="50px">
-        </a>
-      </div>
-    </div>
-  </nav>
 
-  <div class="row">
-    <div class="container col-3 marginleft mt-3">
-      <div class="list-group col">
-        <a class="dropdown-item" href="{% url 'stocks' %}">Акции</a>
-        <a class="dropdown-item" href="{% url 'main' %}">Новинки</a>
-        <a class="list-group-item dropdown-toggle" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" href="#">Альбомы</a>
-        <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="{% url 'seventeen' %}">Seventeen</a></li>
-          <li><a class="dropdown-item" href="{% url 'enhypen' %}">Enhypen</a></li>
-          <li><a class="dropdown-item" href="{% url 'straykids' %}">Stray Kids</a></li>
-          <li><a class="dropdown-item" href="{% url 'category_view' 'bts' %}">BTS</a></li>
-          <li><a class="dropdown-item" href="{% url 'category_view' 'txt' %}">TXT</a></li>
-          <li><a class="dropdown-item" href="{% url 'category_view' 'ateez' %}">Ateez</a></li>
-          <li><a class="dropdown-item" href="{% url 'category_view' 'twice' %}">Twice</a></li>
-          <li><a class="dropdown-item" href="{% url 'category_view' 'aespa' %}">Aespa</a></li>
-          <li><a class="dropdown-item" href="{% url 'category_view' 'idle' %}">I-DLE</a></li>
-          <li><a class="dropdown-item" href="{% url 'category_view' 'itzy' %}">Itzy</a></li>
-          <li><a class="dropdown-item" href="{% url 'category_view' 'blackpink' %}">Blackpink</a></li>
-          <li><a class="dropdown-item" href="{% url 'category_view' 'lesserafim' %}">Le Sserafim</a></li>
-        </ul>
-        <a class="dropdown-item" href="{% url 'merch' %}">Мерч</a>
-      </div>
-    </div>
+{% block content %}
+<div class="row">
+  <label class="fs-2 fw-bold text-center qq">ㅤ</label>
+</div>
 
-    <div class="row col-9">
-      <div class="content">
-        <div class="row">
-          <label class="fs-2 fw-bold text-center qq">ㅤ</label>
+<div class="ps-5">
+  <form method="post" action="{% url 'add_to_cart' object.id %}" class="product-detail ps-5">
+    {% csrf_token %}
+    <div class="image_info row">
+      <div class="img_card col-3">
+        <img class="image_card" src="{{ object.photo.url }}">
+      </div>
+      <div class="info col-9 ps-5">
+        <div class="title_product text-purple fw-bold">
+          <label>{{ object.title }}</label>
         </div>
-        <div class="ps-5">
-          <form method="post" action="{% url 'add_to_cart' object.id %}" class="product-detail ps-5">
-            {% csrf_token %}
-            <div class="image_info row">
-              <div class="img_card col-3">
-                <img class="image_card" src="{{ object.photo.url }}">
-              </div>
-              <div class="info col-9 ps-5">
-                <div class="title_product text-purple fw-bold">
-                  <label>{{ object.title }}</label>
-                </div>
-                <div class="price_product mm">
-                  <label>{{ object.price }} руб</label>
-                </div>
-                <div class="btn_buy_btn_favo row align-items-center">
-                  <div class="add_button col-auto">
-                    <button class="button_buy" type="submit">
-                      <img class="basket_img" src="{% static 'img/basket.png' %}"> В корзину
-                    </button>
-                  </div>
-          </form>  
-          
-          <form method="post" action="{% url 'add_to_favorites' product.id %}" class="col-auto">
-            {% csrf_token %}
-            <button type="submit" class="favo_button">
-              <img src="{% static 'img/like.png' %}" class="favo_img" alt="Добавить в избранное">
+        <div class="price_product mm">
+          <label>{{ object.price }} руб</label>
+        </div>
+        <div class="btn_buy_btn_favo row align-items-center">
+          <div class="add_button col-auto">
+            <button class="button_buy" type="submit">
+              <img class="basket_img" src="{% static 'img/basket.png' %}"> В корзину
             </button>
-          </form>
-          
-                </div> 
-          
-                <div class="description-box">
-                  <label class="description_title">ㅤ</label><br>
-                  <label class="text-wrap">{{ object.description|linebreaks }}</label><br>
-                </div>
-              </div>
+          </div>
+  </form>  
+
+  <form method="post" action="{% url 'add_to_favorites' object.id %}" class="col-auto">
+    {% csrf_token %}
+    <button type="submit" class="favo_button">
+      <img src="{% static 'img/like.png' %}" class="favo_img" alt="Добавить в избранное">
+    </button>
+  </form>
+
+        </div> 
+
+        <div class="description-box">
+          <label class="description_title">ㅤ</label><br>
+          <label class="text-wrap">{{ object.description|linebreaks }}</label><br>
+        </div>
+      </div>
+    </div>
+
+    <div class="row row-cols-3">
+      {% for product in products %}
+        <div class="col p-5">
+          <div class="row p-2 border bg-light">
+            <div class="d-flex justify-content-center align-items-center">
+              <img src="{{ product.photo.url }}" alt="Изображение" width="250" height="250">
             </div>
-        <div class="row row-cols-3">
-          {% for product in products %}
-          <div class="col p-5">
-            <div class="row p-2 border bg-light">
-              <div class="d-flex justify-content-center align-items-center">
-                <img src="{{ product.photo.url }}" alt="Изображение" width="250" height="250">
-              </div>
-              <div class="d-flex justify-content-center align-items-center">
-                <a class="text-center fs-5 link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">{{ product.title }}</a>
-              </div>
-              <div class="d-flex justify-content-center align-items-center">
-                <label class="text-center fs-5 mm">{{ product.price }} руб.</label>
-              </div>
+            <div class="d-flex justify-content-center align-items-center">
+              <a class="text-center fs-5 link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">{{ product.title }}</a>
+            </div>
+            <div class="d-flex justify-content-center align-items-center">
+              <label class="text-center fs-5 mm">{{ product.price }} руб.</label>
             </div>
           </div>
-          {% endfor %}
         </div>
-      </div>
+      {% endfor %}
     </div>
-  </div>
-    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-  </body>
-</html>
+</div>
+{% endblock %}

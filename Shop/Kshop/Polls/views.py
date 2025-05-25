@@ -137,6 +137,10 @@ def cart_data(request):
 def checkout(request):
     cart = get_object_or_404(Cart, user=request.user)
     items = cart.items.select_related('product').all()
+
+    if not items.exists():
+        return redirect(request.META.get('HTTP_REFERER', 'main'))
+
     total_price = sum(item.product.price * item.quantity for item in items)
 
     if request.method == 'POST':
