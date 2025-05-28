@@ -47,7 +47,7 @@ class Order(models.Model):
     card_number = models.CharField("Номер карты", max_length=19, blank=True)  
     total_price = models.DecimalField("Сумма заказа", max_digits=10, decimal_places=2, default=0)
     created_at = models.DateTimeField(auto_now_add=True)
-    status = models.CharField("Статус", max_length=20, choices=ORDER_STATUS_CHOICES, default='created')  # <-- добавлено
+    status = models.CharField("Статус", max_length=20, choices=ORDER_STATUS_CHOICES, default='created') 
 
     def __str__(self):
         return f"Заказ #{self.id} ({self.get_status_display()})"
