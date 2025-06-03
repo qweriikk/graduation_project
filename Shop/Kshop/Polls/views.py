@@ -9,6 +9,7 @@ from django.views.generic import DetailView, ListView, View
 from django.contrib import messages
 from .forms import LoginForm, OrderForm
 from .models import Product, Cart, CartItem, Order, OrderItem, Favorite, Category
+from .forms import CustomRegistrationForm
 
 
 def product_description(request):
@@ -223,11 +224,11 @@ def search_results(request):
 
 class RegisterView(View):
     def get(self, request):
-        form = UserCreationForm()
+        form = CustomRegistrationForm()
         return render(request, "Polls/register.html", {'form': form})
 
     def post(self, request):
-        form = UserCreationForm(request.POST)
+        form = CustomRegistrationForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request, user)
